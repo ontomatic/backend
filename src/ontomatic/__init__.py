@@ -1,2 +1,2 @@
 def main() -> None:
-    print("Hello from ontomatic!")
+  print('Hello from ontomatic!')

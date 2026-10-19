@@ -3,14 +3,14 @@ name = "ontomatic"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "mobius29", email = "sagjin0906@gmail.com" }
-]
 requires-python = ">=3.12"
 dependencies = []
 
 [project.scripts]
 ontomatic = "ontomatic:main"
+
+[dependency-groups]
+dev = ["ruff>=0.17.1"]
 
 [build-system]
 requires = ["uv_build>=0.12.23,<0.13.0"]
