@@ -1,0 +1,17 @@
+services:
+  langfuse:
+    image: langfuse/langfuse:2
+    container_name: ontomatic-langfuse
+    profiles: ["ontomatic-langfuse"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${LANGFUSE_DATABASE_URL?:LANGFUSE_DATABASE_URL is required}
+      NEXTAUTH_URL: ${LANGFUSE_NEXTAUTH_URL?:LANGFUSE_NEXTAUTH_URL is required}
+      NEXTAUTH_SECRET: ${LANGFUSE_NEXTAUTH_SECRET?:LANGFUSE_NEXTAUTH_SECRET isrequired}
+      SALT: ${LANGFUSE_SALT?:LANGFUSE_SALT is required}
+      ENCRYPTION_KEY: ${LANGFUSE_ENCRYPTION_KEY?:LANGFUSE_ENCRYPTION_KEY is required}
+      TELEMETRY_ENABLED: false
+    ports:
+      - "${LANGFUSE_PORT:-3000}:3000"

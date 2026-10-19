@@ -1,0 +1,3 @@
+include:
+  - ./infra/postgres/compose.yaml
+  - ./infra/langfuse/compose.yaml
