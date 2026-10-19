@@ -6,6 +6,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from backend.api.v1.auth import router as auth_router
+from backend.api.v1.chat import router as chat_router
 from backend.core.logger import setup_logger
 from backend.exceptions.base import AppException
 from backend.integrations.langfuse import initialize_langfuse, shutdown_langfuse
@@ -28,6 +29,7 @@ app = FastAPI(
   responses={422: {'model': ErrorOut}},
 )
 app.include_router(auth_router, prefix='/api/v1')
+app.include_router(chat_router, prefix='/api/v1')
 
 
 @app.exception_handler(AppException)

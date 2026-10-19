@@ -32,7 +32,7 @@ class Settings(BaseSettings):
   langfuse_public_key: str | None = None
   langfuse_host: str = 'http://localhost:3000'
 
-  llm_provider: Literal['ollama', 'gemini', 'claude'] = 'ollama'
+  llm_provider: Literal['ollama', 'google', 'anthropic'] = 'ollama'
   llm_model: str = 'llama3.2'
   ollama_base_url: str = 'http://localhost:11434'
 
