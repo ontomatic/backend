@@ -23,6 +23,9 @@ class Settings(BaseSettings):
   postgres_port: int = Field(default=5432, ge=1, le=65535)
   postgres_db: str
 
+  jwt_secret_key: SecretStr
+  jwt_expire_minutes: int = Field(default=480, ge=1)
+
   langfuse_enabled: bool = False
   langfuse_secret_key: SecretStr | None = None
   langfuse_public_key: str | None = None
