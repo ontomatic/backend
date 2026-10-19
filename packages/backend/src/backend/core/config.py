@@ -1,5 +1,6 @@
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -31,6 +32,11 @@ class Settings(BaseSettings):
   langfuse_public_key: str | None = None
   langfuse_host: str = 'http://localhost:3000'
 
+  llm_provider: Literal['ollama', 'gemini', 'claude'] = 'ollama'
+  llm_model: str = 'llama3.2'
+  ollama_base_url: str = 'http://localhost:11434'
+
+  google_api_key: SecretStr | None = None
   anthropic_api_key: SecretStr | None = None
 
   @property

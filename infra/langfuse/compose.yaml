@@ -2,7 +2,7 @@ services:
   langfuse:
     image: langfuse/langfuse:2
     container_name: ontomatic-langfuse
-    profiles: ["ontomatic-langfuse"]
+    profiles: ["langfuse"]
     depends_on:
       postgres:
         condition: service_healthy
