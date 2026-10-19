@@ -23,9 +23,10 @@ class Settings(BaseSettings):
   postgres_port: int = Field(default=5432, ge=1, le=65535)
   postgres_db: str
 
+  langfuse_enabled: bool = False
   langfuse_secret_key: SecretStr | None = None
   langfuse_public_key: str | None = None
-  langfuse_host: str | None = None
+  langfuse_host: str = 'http://localhost:3000'
 
   anthropic_api_key: SecretStr | None = None
 
