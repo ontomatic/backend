@@ -1,4 +1,3 @@
 include:
-  - path: ./packages/backend/infra/postgres/compose.yaml
+  - path: ./packages/backend/infra/postgres/docker-compose.yaml
     env_file: ./packages/backend/.env
-  - ./infra/langfuse/compose.yaml
