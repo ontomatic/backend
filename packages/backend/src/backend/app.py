@@ -28,6 +28,13 @@ app = FastAPI(
   lifespan=lifespan,
   responses={422: {'model': ErrorOut}},
 )
+
+
+@app.get('/health-check')
+def health_check():
+  return JSONResponse(status_code=200, content={'status': 'ok'})
+
+
 app.include_router(auth_router, prefix='/api/v1')
 app.include_router(chat_router, prefix='/api/v1')
 
