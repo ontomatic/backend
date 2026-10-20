@@ -30,7 +30,7 @@ class Settings(BaseSettings):
   langfuse_enabled: bool = False
   langfuse_secret_key: SecretStr | None = None
   langfuse_public_key: str | None = None
-  langfuse_host: str = 'http://localhost:3000'
+  langfuse_base_url: str = 'http://localhost:3000'
 
   llm_provider: Literal['ollama', 'google', 'anthropic'] = 'ollama'
   llm_model: str = 'llama3.2'
