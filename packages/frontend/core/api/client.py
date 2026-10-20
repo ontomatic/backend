@@ -2,11 +2,12 @@ from typing import Literal
 
 import httpx2
 import streamlit as st
+from core.config import API_URL
 
 
 @st.cache_resource
 def get_client() -> httpx2.Client:
-  return httpx2.Client(base_url='http://localhost:8000')
+  return httpx2.Client(base_url=API_URL)
 
 
 Method = Literal['get', 'post', 'put', 'patch', 'delete']

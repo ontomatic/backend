@@ -3,8 +3,8 @@
 ## Installation
 
 ```bash
-git clone ~~.git
-cd ~~
+git clone https://github.com/ontomatic/ontomatic.git
+cd ontomatic
 
 uv venv .venv
 source .venv\Script\activate.bat
@@ -18,8 +18,14 @@ From project root directory,
 ### Run API
 
 ```bash
-cp packages/backend/.env.example packages/backend/.env
-uv run --package backend api # Backend
+cp packages/backend/.env.example packages/backend/.env # fill environments
+uv run --package backend api
+```
+
+### Run Streamlit
+
+```bash
+uv run --package frontend streamlit run app.py
 ```
 
 ## PostgreSQL with pgvector
