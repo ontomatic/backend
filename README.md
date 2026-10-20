@@ -7,8 +7,8 @@ git clone https://github.com/ontomatic/ontomatic.git
 cd ontomatic
 
 uv venv .venv
-source .venv\Script\activate.bat
-uv sync --all-package --locked
+.venv\Script\activate.bat
+uv sync --all-packages --locked
 ```
 
 ## Run
