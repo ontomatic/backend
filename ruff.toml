@@ -1,5 +1,7 @@
 line-length = 120
 indent-width = 2
+extend-exclude = ["packages/backend/src/backend/db/migrations"]
+force-exclude = true
 
 [format]
 quote-style = "single"
