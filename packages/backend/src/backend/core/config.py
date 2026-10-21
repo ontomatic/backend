@@ -39,6 +39,13 @@ class Settings(BaseSettings):
   google_api_key: SecretStr | None = None
   anthropic_api_key: SecretStr | None = None
 
+  s3_endpoint_url: str = 'http://localhost:9000'
+  s3_region: str = 'us-east-1'
+  s3_access_key_id: SecretStr
+  s3_secret_access_key: SecretStr
+  s3_addressing_style: Literal['auto', 'path', 'virtual'] = 'path'
+  s3_bucket: str = 'ontomatic'
+
   @property
   def database_url(self) -> URL:
     return URL.create(

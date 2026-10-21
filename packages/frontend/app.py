@@ -1,5 +1,7 @@
 import streamlit as st
 from core.api.client import call
+from views.login import render_login
+from views.upload import render_upload
 
 st.set_page_config(page_title='Ontomatic', page_icon='📚', layout='wide')
 
@@ -12,3 +14,13 @@ if st.button('Health check'):
     st.success(f'Backend status: {result["status"]}')
   except Exception as exc:
     st.error(f'Health check failed: {exc}')
+
+if not st.session_state.get('access_token'):
+  render_login()
+  st.stop()
+
+if st.sidebar.button('로그아웃'):
+  st.session_state.clear()
+  st.rerun()
+
+render_upload()

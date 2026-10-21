@@ -1,13 +1,21 @@
-from datetime import UTC, datetime
+import enum
+from datetime import datetime
 
-from sqlalchemy import DateTime
+from sqlalchemy import DateTime, Enum
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 from backend.core.utils import utc_now
 
 
 class Base(DeclarativeBase):
-  pass
+  type_annotation_map = {
+    enum.Enum: Enum(
+      enum.Enum,
+      native_enum=False,
+      create_constraint=True,
+      values_callable=lambda cls: [member.value for member in cls],
+    )
+  }
 
 
 class TimestampMixin:
