@@ -30,7 +30,7 @@ class S3Storage(Storage):
         Params={'Bucket': self._bucket, 'Key': key, 'ContentType': content_type},
         ExpiresIn=expires_in,
       )
-    except ClientError as e:
+    except ClientError:
       logger.exception('Failed to issue upload url')
       raise
 
