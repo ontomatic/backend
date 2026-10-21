@@ -1,4 +1,6 @@
 name: ontomatic-apps
 include:
-  - path: ./packages/backend/infra/postgres/docker-compose.yaml
+  - path:
+    - ./packages/backend/infra/postgres/docker-compose.yaml
+    - ./packages/backend/infra/rustfs/docker-compose.yaml
     env_file: ./packages/backend/.env
