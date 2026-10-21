@@ -10,5 +10,6 @@ class UploadFilesIn(BaseModel):
   files: list[UploadFileDetail] = Field(min_length=1, max_length=10)
 
 
-class UploadFilesOut(BaseModel):
-  urls: list[str]
+class UploadFileOut(BaseModel):
+  file_id: int
+  upload_url: str
