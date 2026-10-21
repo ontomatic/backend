@@ -1,6 +1,7 @@
 import streamlit as st
 from core.api.client import call
 from views.login import render_login
+from views.upload import render_upload
 
 st.set_page_config(page_title='Ontomatic', page_icon='📚', layout='wide')
 
@@ -21,3 +22,5 @@ if not st.session_state.get('access_token'):
 if st.sidebar.button('로그아웃'):
   st.session_state.clear()
   st.rerun()
+
+render_upload()
