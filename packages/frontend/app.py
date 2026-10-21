@@ -17,3 +17,7 @@ if st.button('Health check'):
 if not st.session_state.get('access_token'):
   render_login()
   st.stop()
+
+if st.sidebar.button('로그아웃'):
+  st.session_state.clear()
+  st.rerun()
