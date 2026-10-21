@@ -4,7 +4,7 @@ from typing import BinaryIO
 import boto3
 from backend.core.config import get_settings
 from backend.core.logger import get_logger
-from backend.integrations.storage.interface import Storage
+from backend.integrations.storage.interface import ObjectInfo, Storage
 from botocore.client import ClientError, Config
 
 logger = get_logger(__file__)
@@ -45,8 +45,11 @@ class S3Storage(Storage):
   def get_download_url(self, key: str, *, expires_in: int = 3600):
     raise NotImplementedError()
 
+  def get_object_info(self, key: str) -> ObjectInfo:
+    object = self._client.head_object(Bucket=self._bucket, Key=key)
+    return ObjectInfo(size=object['ContentLength'], content_type=object.get('ContentType'))
+
 
 @lru_cache
-def get_storage(bucket: str | None = None) -> Storage:
-  bucket = bucket if bucket is not None else settings.s3_bucket
+def get_storage(bucket: str) -> Storage:
   return S3Storage(bucket=bucket)

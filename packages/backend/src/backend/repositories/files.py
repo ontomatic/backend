@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
+from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from backend.models.file import File
+from backend.models.file import File, FileStatus
 
 
 @dataclass
@@ -27,3 +28,14 @@ def create_files(session: Session, *, uploader_id: int, bucket: str, items: list
   session.flush()
 
   return files
+
+
+def get_file_by_file_id(session: Session, *, file_id: int) -> File | None:
+  statement = select(File).where(File.id == file_id)
+  return session.scalar(statement)
+
+
+def make_file_uploaded(session: Session, file: File, *, file_size: int) -> None:
+  file.file_size = file_size
+  file.status = FileStatus.UPLOADED
+  session.flush()

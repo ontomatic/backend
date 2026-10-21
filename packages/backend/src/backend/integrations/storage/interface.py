@@ -1,5 +1,12 @@
 from abc import abstractmethod
+from dataclasses import dataclass
 from typing import BinaryIO, Protocol
+
+
+@dataclass
+class ObjectInfo:
+  size: int
+  content_type: str
 
 
 class Storage(Protocol):
@@ -14,3 +21,6 @@ class Storage(Protocol):
 
   @abstractmethod
   def get_download_url(self, key: str, *, expires_in: int = 3600) -> str: ...
+
+  @abstractmethod
+  def get_object_info(self, key: str) -> ObjectInfo: ...
