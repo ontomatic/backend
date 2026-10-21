@@ -7,8 +7,13 @@ git clone https://github.com/ontomatic/ontomatic.git
 cd ontomatic
 
 uv venv .venv
-.venv\Scripts\activate.bat
-uv sync --all-packages --locked
+
+# Windows
+.venv\bin\activate.bat
+# macOS
+source .venv/bin/activate
+
+uv sync --all-package --locked
 ```
 
 ## Run
@@ -18,21 +23,20 @@ From project root directory,
 ### Run API
 
 ```bash
-cp packages/backend/.env.example packages/backend/.env # fill environments
+# Windows
+copy packages/backend/.env.example packages/backend/.env 
+# macOS / Linux
+cp packages/backend/.env.example packages/backend/.env
+
+# After filling environment variables
+dockerc compose up -d
+
 uv run --package backend api
 ```
 
 ### Run Streamlit
 
 ```bash
-uv run --package frontend streamlit run app.py
-```
-
-## PostgreSQL with pgvector
-
-Copy `.env.example` to `.env` and set `APP_POSTGRES_PASSWORD`, then run:
-
-```bash
-docker compose up -d
-docker compose --profile langfuse up -d
+cd packages/frontend
+uv run streamlit run app.py
 ```
