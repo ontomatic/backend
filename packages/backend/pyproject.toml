@@ -18,10 +18,16 @@ dependencies = [
   "pyjwt>=2.15.1",
   "sqlalchemy>=2.1.5",
   "uvicorn[standard]>=0.54.0",
+  "huggingface-hub>=2.2.0",
+  "pyyaml>=6.0.3",
 ]
 
 [project.scripts]
 api = "backend:main"
+download-model = "cli.models.download:main"
+
+[tool.setuptools.packages.find]
+include = ["cli*"]
 
 [build-system]
 requires = ["uv_build>=0.12.23,<0.13"]
