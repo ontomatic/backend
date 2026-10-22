@@ -36,8 +36,8 @@ class S3Storage(Storage):
 
     return response
 
-  def download(self, key: str, destination: BinaryIO):
-    raise NotImplementedError()
+  def download(self, key: str, destination: BinaryIO) -> None:
+    self._client.download_fileobj(self._bucket, key, destination)
 
   def delete(self, key: str):
     raise NotImplementedError()
