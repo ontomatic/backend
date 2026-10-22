@@ -1,11 +1,12 @@
 from dataclasses import dataclass
-from typing import BinaryIO, Protocol
+from io import BytesIO
+from typing import Protocol
 
 
 @dataclass
 class ParsedDocument:
-  pass
+  text: str
 
 
 class DocumentParser(Protocol):
-  def __call__(self, source: bytes, /) -> ParsedDocument: ...
+  def __call__(self, source: BytesIO, /) -> ParsedDocument: ...

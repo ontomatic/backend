@@ -4,7 +4,7 @@ from core.api.upload import complete_upload, get_presigned_urls, upload_file
 
 
 def render_upload() -> None:
-  files = st.file_uploader('문서 선택', type=['pdf', 'docx', 'xlsx'], accept_multiple_files=True)
+  files = st.file_uploader('문서 선택', type=['pdf', 'docx', 'xlsx', 'csv'], accept_multiple_files=True)
 
   if st.button('업로드', disabled=not files):
     results, progress = [], st.progress(0.0)

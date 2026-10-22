@@ -1,14 +1,16 @@
-import csv
-from io import StringIO
+from io import BytesIO, TextIOWrapper
 
 from backend.parsers.documents.interface import ParsedDocument
 
 
-def parse_csv(source: bytes) -> ParsedDocument:
-  try:
-    text = source.decode('utf-8-sig')
-  except UnicodeDecodeError:
-    text = source.decode('cp949')
+def parse_csv(source: BytesIO) -> ParsedDocument:
+  import csv
 
-  reader = csv.reader(StringIO(text, newline=''))
-  raise NotImplementedError()
+  text_source = TextIOWrapper(source, encoding='utf-8')
+
+  try:
+    reader = csv.reader(text_source)
+    text = '\n'.join([', '.join(row) for row in reader])
+    return ParsedDocument(text=text)
+  finally:
+    text_source.detach()

@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from dataclasses import dataclass
-from typing import BinaryIO, Protocol
+from io import BytesIO
+from typing import Protocol
 
 
 @dataclass
@@ -14,7 +15,7 @@ class Storage(Protocol):
   def get_upload_url(self, key: str, *, content_type: str, expires_in: int = 3600) -> str: ...
 
   @abstractmethod
-  def download(self, key: str, destination: BinaryIO) -> None: ...
+  def download(self, key: str, destination: BytesIO) -> None: ...
 
   @abstractmethod
   def delete(self, key: str) -> None: ...

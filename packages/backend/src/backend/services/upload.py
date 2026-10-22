@@ -7,6 +7,7 @@ from backend.integrations.storage.s3 import get_storage
 from backend.models.file import FileStatus
 from backend.repositories.files import FileCreate, create_files, get_file_by_file_id, make_file_uploaded
 from backend.schemas.upload import UploadFileDetail, UploadFileOut
+from backend.services.document import parse_document
 
 
 def create_upload_key(user_id: int) -> str:
@@ -42,3 +43,5 @@ def complete_file_upload(user_id: int, file_id: int):
     storage = get_storage(file.bucket)
     object_info = storage.get_object_info(file.key)
     make_file_uploaded(session, file, file_size=object_info.size)
+
+  parse_document(user_id, file_id)

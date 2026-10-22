@@ -1,7 +1,7 @@
-from typing import BinaryIO
+from io import BytesIO
 
 from backend.parsers.documents.interface import ParsedDocument
 
 
-def parse_xlsx(source: BinaryIO) -> ParsedDocument:
+def parse_xlsx(source: BytesIO) -> ParsedDocument:
   raise NotImplementedError()

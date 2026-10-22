@@ -11,11 +11,13 @@ dependencies = [
   "langchain-google-genai>=4.4.2",
   "langchain-ollama>=1.1.0",
   "langfuse>=5.0.2",
+  "openpyxl>=3.1.5",
   "pdfplumber>=0.11.10",
   "psycopg[binary]>=3.3.6",
   "pydantic>=2.14.1",
   "pydantic-settings>=2.16.0",
   "pyjwt>=2.15.1",
+  "python-docx>=1.2.0",
   "sqlalchemy>=2.1.5",
   "uvicorn[standard]>=0.54.0",
 ]
