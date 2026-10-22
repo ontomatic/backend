@@ -8,12 +8,13 @@ from backend.db.session import get_session
 from backend.integrations.storage.s3 import get_storage
 from backend.models.file import FileStatus
 from backend.parsers.documents import get_parser
+from backend.parsers.documents.interface import ParsedDocument
 from backend.repositories.files import get_file_by_file_id
 
 logger = get_logger(__file__)
 
 
-def parse_document(user_id: int, file_id: int):
+def parse_document(user_id: int, file_id: int) -> ParsedDocument:
   with get_session() as session:
     file = get_file_by_file_id(session, file_id=file_id)
     if file is None or file.uploader_id != user_id:
@@ -30,7 +31,7 @@ def parse_document(user_id: int, file_id: int):
         storage.download(file.key, source)
         source.seek(0)
 
-        parsed_doc = parser(source)
-        logger.info('Parsed Text:\n%s', parsed_doc.text)
+        return parser(source)
     except Exception as exc:
       logger.exception('Failed to parse file: %s', str(exc))
+      raise ValueError() from exc

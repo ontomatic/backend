@@ -14,7 +14,6 @@ PARSERS: dict[str, DocumentParser] = {
 
 def get_parser(file_format: str) -> DocumentParser:
   try:
-    print(file_format)
     ext = file_format.lower().lstrip('.')
     return PARSERS[ext]
   except KeyError:

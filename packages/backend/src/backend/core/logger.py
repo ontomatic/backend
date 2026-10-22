@@ -1,7 +1,7 @@
 import logging
 import sys
 
-_FORMAT = '%(asctime)s %(levelname)-8s %(name)s: %(message)s'
+_FORMAT = '%(asctime)s %(levelname)-8s %(name)s: %(message)s\n'
 _DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
 _NOISY = ('httpx', 'httpcore', 'urllib3', 'asyncio')
 _handler: logging.StreamHandler | None = None
