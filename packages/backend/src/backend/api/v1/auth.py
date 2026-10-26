@@ -1,8 +1,8 @@
 from backend.api.dependencies import RequestSession
-from backend.api.guard import CurrentUserId
+from backend.api.guard import CurrentUser
 from backend.schemas.auth import LoginIn, TokenOut
 from backend.schemas.user import UserOut
-from backend.services.auth import get_current_user, login
+from backend.services.auth import login
 from fastapi import APIRouter
 
 router = APIRouter(prefix='/auth', tags=['auth'])
@@ -15,5 +15,5 @@ def login_user(session: RequestSession, body: LoginIn) -> TokenOut:
 
 
 @router.get('/me', response_model=UserOut)
-def current_user(user_id: CurrentUserId, session: RequestSession) -> UserOut:
-  return UserOut.model_validate(get_current_user(session, user_id))
+def current_user(user: CurrentUser) -> UserOut:
+  return UserOut.model_validate(user)

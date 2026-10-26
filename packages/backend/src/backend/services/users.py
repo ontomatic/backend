@@ -14,7 +14,6 @@ from backend.repositories.users import (
   update_general_user,
 )
 from backend.schemas.user import UserCreateIn, UserListQuery, UserUpdateIn
-from backend.services.auth import require_system_admin
 from backend.services.departments import require_active_department
 
 
@@ -27,8 +26,7 @@ def require_general_user(session: Session, user_id: int) -> User:
   return user
 
 
-def create_user(session: Session, actor_id: int, body: UserCreateIn) -> User:
-  require_system_admin(session, actor_id)
+def create_user(session: Session, body: UserCreateIn) -> User:
   if get_user_by_emp_id(session, body.emp_id) is not None:
     raise DuplicateEmployeeIdException()
   department = require_active_department(session, body.department_id)
@@ -46,15 +44,13 @@ def create_user(session: Session, actor_id: int, body: UserCreateIn) -> User:
     raise
 
 
-def update_user(session: Session, actor_id: int, user_id: int, body: UserUpdateIn) -> User:
-  require_system_admin(session, actor_id)
+def update_user(session: Session, user_id: int, body: UserUpdateIn) -> User:
   user = require_general_user(session, user_id)
   department = require_active_department(session, body.department_id) if body.department_id is not None else None
   return update_general_user(session, user, name=body.name, department=department)
 
 
-def get_users(session: Session, user_id: int, query: UserListQuery) -> tuple[list[User], int]:
-  require_system_admin(session, user_id)
+def get_users(session: Session, query: UserListQuery) -> tuple[list[User], int]:
   return get_active_users(
     session,
     q=query.q,
