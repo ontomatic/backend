@@ -6,7 +6,8 @@ from backend.db.session import get_session
 from backend.exceptions.auth import InsufficientPermissionsException, InvalidCredentialsException
 from backend.models.user import User, UserRole
 from backend.repositories.users import get_user_by_emp_id, get_user_by_id
-from backend.schemas.user import DepartmentOut, UserOut
+from backend.schemas.department import DepartmentOut
+from backend.schemas.user import UserOut
 
 
 def login(emp_id: str, password: str) -> str:
