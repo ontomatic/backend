@@ -8,4 +8,5 @@ router = APIRouter(prefix='/chat', tags=['chat'])
 
 @router.post('', response_model=ChatOut)
 async def chat(user_id: CurrentUserId, body: ChatIn) -> ChatOut:
-  return await generate_chat(user_id, body.prompt)
+  response = await generate_chat(user_id, body.prompt)
+  return response
