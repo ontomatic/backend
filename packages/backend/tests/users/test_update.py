@@ -4,7 +4,7 @@ from backend.schemas.user import UserOut
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from .factories import create_department, create_user
+from ..factories import create_department, create_user
 
 
 @pytest.fixture
