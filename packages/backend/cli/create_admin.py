@@ -2,7 +2,7 @@ from getpass import getpass
 
 from backend.core.password import hash_password
 from backend.db.session import get_session
-from backend.models.user import User
+from backend.models.user import User, UserRole
 from backend.repositories.users import get_user_by_emp_id
 from sqlalchemy.exc import IntegrityError
 
@@ -30,7 +30,7 @@ def create_admin() -> None:
         print('이미 등록된 사번입니다.')
         return
 
-      user = User(emp_id=emp_id, name=name, password_hash=hash_password(password), department=None, role='system_admin')
+      user = User(emp_id=emp_id, name=name, password_hash=hash_password(password), role=UserRole.SYSTEM_ADMIN)
       session.add(user)
   except IntegrityError:
     print('생성에 실패했습니다. 사번 중복 또는 DB 제약을 확인하세요.')
