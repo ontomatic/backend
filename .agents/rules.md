@@ -10,8 +10,7 @@ Codex와 Claude Code는 작업을 시작할 때 이 문서를 읽는다. 작업�
 - `packages/backend/tests`: backend 테스트. 현재 CSV 파서 테스트는 외부 서비스 없이 실행할 수 있다.
 - `packages/backend/src/backend/db/migrations`: Alembic 마이그레이션과 revision 파일.
 - `docker-compose.yaml`: 로컬 PostgreSQL과 RustFS 실행 구성.
-- `.agents/scripts/check.py`: 공통 검증기의 실제 구현.
-- `scripts/check.py`: 기존 명령을 유지하는 검증 진입점.
+- `scripts/check.py`: 공통 검증기.
 
 ## 변경 범위와 코드 규칙
 

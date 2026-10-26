@@ -1,7 +1,7 @@
 # 공통 개발 지침
 
 Python 3.12와 uv workspace를 사용하는 FastAPI backend·Streamlit frontend 프로젝트이다.
-Codex와 Claude Code는 이 문서를 공통 진입점으로 사용하며, 상세 지침과 검증기 구현은 `.agents`에서 관리한다.
+Codex와 Claude Code는 이 문서를 공통 진입점으로 사용하며, 상세 지침은 `.agents`에서 관리한다.
 아래 경로와 명령은 저장소 루트를 기준으로 한다.
 
 ## 작업 시작 시 읽을 문서
@@ -16,5 +16,4 @@ Codex와 Claude Code는 이 문서를 공통 진입점으로 사용하며, 상�
 uv run python scripts/check.py
 ```
 
-기존 `scripts/check.py`는 [.agents/scripts/check.py](.agents/scripts/check.py)를 실행하는 진입점이다.
 작업 완료 전에 공통 검증과 변경 내용에 필요한 추가 검증을 수행하고 결과를 보고한다.

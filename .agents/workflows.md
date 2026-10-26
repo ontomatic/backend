@@ -46,7 +46,6 @@ DB 변경을 포함하면 적용·되돌리기 검증 여부도 본문에 기록
 uv run python scripts/check.py
 ```
 
-`scripts/check.py`는 `.agents/scripts/check.py`를 실행한다.
 검증기는 자신의 위치에서 저장소 루트를 계산하고, 같은 Python 인터프리터로 Ruff 코드 검사 → 포맷 확인 → backend pytest를 실행한다.
 앞선 검사가 실패해도 나머지 검사를 시도하며 각 검사 출력과 최종 결과를 보여준다.
 모두 성공하면 종료 코드 `0`, 검사 실패나 실행 오류가 있으면 `1`을 반환한다.
