@@ -1,11 +1,15 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
+
+
+class DepartmentOut(BaseModel):
+  id: int
+  name: str
 
 
 class UserOut(BaseModel):
-  model_config = ConfigDict(from_attributes=True)
-
   id: int
   emp_id: str
   name: str
-  department: str | None
+  department: DepartmentOut | None
   role: str
+  is_active: bool

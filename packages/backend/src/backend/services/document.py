@@ -10,12 +10,14 @@ from backend.models.file import FileStatus
 from backend.parsers.documents import get_parser
 from backend.parsers.documents.interface import ParsedDocument
 from backend.repositories.files import get_file_by_file_id
+from backend.services.auth import require_active_user
 
 logger = get_logger(__file__)
 
 
 def parse_document(user_id: int, file_id: int) -> ParsedDocument:
   with get_session() as session:
+    require_active_user(session, user_id)
     file = get_file_by_file_id(session, file_id=file_id)
     if file is None or file.uploader_id != user_id:
       raise FileNotFoundError()
