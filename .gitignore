@@ -9,6 +9,17 @@ wheels/
 # Virtual environments
 .venv
 
+# Local caches
+.cache/
+.pytest_cache/
+.ruff_cache/
+
+# Personal AI tool settings and execution logs
+.claude/settings.local.json
+CLAUDE.local.md
+.codex-log/
+*.log
+
 # environments
 .env
 .env.*
