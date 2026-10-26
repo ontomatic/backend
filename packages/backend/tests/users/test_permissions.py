@@ -4,7 +4,7 @@ from backend.models import UserRole
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from .factories import create_user
+from ..factories import create_user
 
 
 @pytest.mark.parametrize('role', [UserRole.USER, UserRole.DEPARTMENT_ADMIN])

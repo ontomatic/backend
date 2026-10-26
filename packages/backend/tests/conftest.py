@@ -13,7 +13,7 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import ConnectionPoolEntry, StaticPool
 
-from .factories import create_department, create_user
+from .factories import create_user
 
 
 @pytest.fixture(scope='session')
@@ -90,18 +90,3 @@ def admin_user(db_session: Session) -> User:
 def admin_client(client: TestClient, admin_user: User) -> TestClient:
   client.headers['Authorization'] = f'Bearer {create_access_token(admin_user.id)}'
   return client
-
-
-@pytest.fixture
-def active_department(db_session: Session) -> Department:
-  return create_department(db_session, code='research', name='연구개발')
-
-
-@pytest.fixture
-def user_create_body(active_department: Department) -> dict[str, object]:
-  return {
-    'emp_id': 'NEW001',
-    'name': '신규 사용자',
-    'department_id': active_department.id,
-    'password': 'InitialPass123!',
-  }

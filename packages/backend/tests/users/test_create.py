@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy import event, func, select
 from sqlalchemy.orm import Session, sessionmaker
 
-from .factories import create_department, create_user
+from ..factories import create_department, create_user
 
 
 def test_create_user_and_login(

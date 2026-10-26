@@ -2,7 +2,7 @@ from backend.models import UserRole
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from .factories import create_department, create_user
+from ..factories import create_department, create_user
 
 
 def test_list_search_filters_and_pagination(admin_client: TestClient, db_session: Session) -> None:

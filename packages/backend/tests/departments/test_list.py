@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from .factories import create_department
+from ..factories import create_department
 
 
 def test_only_active_departments_are_listed(admin_client: TestClient, db_session: Session) -> None:

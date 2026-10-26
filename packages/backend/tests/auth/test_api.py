@@ -2,7 +2,7 @@ from backend.core.jwt import create_access_token
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from .factories import create_department, create_user
+from ..factories import create_department, create_user
 
 
 def test_existing_profile_response_is_preserved(client: TestClient, db_session: Session) -> None:
