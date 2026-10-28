@@ -1,0 +1,4 @@
+interface:
+  display_name: "카메라 더미 문서 생성"
+  short_description: "PDF를 재가공해 부서별 문서와 골드 라벨을 만드는 스킬"
+  default_prompt: "Use $generate-camera-dummy-docs to create realistic synthetic camera documents, gold labels, and an organized ZIP from the attached PDF samples."
