@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+validation_two_sources/result_D/
+validation_two_sources/qa_*
+*.zip
