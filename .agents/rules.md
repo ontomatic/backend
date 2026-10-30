@@ -4,9 +4,8 @@ Codex와 Claude Code는 작업을 시작할 때 이 문서를 읽는다. 작업�
 
 ## 프로젝트 구조
 
-- Python 3.12와 uv workspace를 사용한다. Python 버전은 `.python-version`, 의존성 버전은 `uv.lock`을 기준으로 한다.
+- Python 3.12와 uv 단일 프로젝트를 사용한다. Python 버전은 `.python-version`, 의존성 버전은 루트 `pyproject.toml`과 `uv.lock`을 기준으로 한다.
 - `packages/backend`: FastAPI API, 서비스, 저장소, 외부 연동, 문서 파서.
-- `packages/frontend`: Streamlit 화면과 HTTP API 클라이언트.
 - `packages/backend/tests`: backend 테스트. 현재 CSV 파서 테스트는 외부 서비스 없이 실행할 수 있다.
 - `packages/backend/src/backend/db/migrations`: Alembic 마이그레이션과 revision 파일.
 - `docker-compose.yaml`: 로컬 PostgreSQL과 RustFS 실행 구성.
@@ -18,7 +17,7 @@ Codex와 Claude Code는 작업을 시작할 때 이 문서를 읽는다. 작업�
 - 요청 범위에 맞춰 수정하며 API·서비스·저장소·외부 연동 계층의 역할을 유지한다.
 - `ruff.toml`의 들여쓰기 2칸, 작은따옴표, 줄 길이 120자 기준을 따른다. 새 함수에는 타입 힌트를 작성한다.
 - 문서 파서는 텍스트·표 블록을 담은 `ParsedDocument`를 반환한다. 기존 반환 계약을 유지한다.
-- 기존 workspace와 의존성을 사용한다. 의존성 변경이 필요한 작업에서는 해당 `pyproject.toml`과 `uv.lock`을 함께 관리한다.
+- 기존 프로젝트와 의존성을 사용한다. 의존성 변경이 필요한 작업에서는 루트 `pyproject.toml`과 `uv.lock`을 함께 관리한다.
 - 동작을 바꾸면 관련 경계 사례를 포함하는 회귀 테스트를 보완한다.
 
 ## 설정과 문서 관리

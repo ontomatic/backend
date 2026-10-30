@@ -1,7 +1,0 @@
-[project]
-name = "frontend"
-version = "0.1.0"
-dependencies = ["httpx2>=2.14.0", "python-dotenv>=1.2.4", "streamlit>=1.66.0"]
-
-[tool.uv]
-package = false
