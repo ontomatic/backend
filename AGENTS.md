@@ -1,6 +1,6 @@
 # 공통 개발 지침
 
-Python 3.12와 uv workspace를 사용하는 FastAPI backend·Streamlit frontend 프로젝트이다.
+Python 3.12와 uv로 관리하는 단일 FastAPI backend 프로젝트이다.
 Codex와 Claude Code는 이 문서를 공통 진입점으로 사용하며, 상세 지침은 `.agents`에서 관리한다.
 아래 경로와 명령은 저장소 루트를 기준으로 한다.
 

@@ -4,13 +4,37 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
+dependencies = [
+  "alembic>=1.20.0",
+  "argon2-cffi>=25.1.0",
+  "boto3>=1.43.116",
+  "fastapi>=0.146.0",
+  "langchain>=1.4.6",
+  "langchain-anthropic>=1.7.6",
+  "langchain-google-genai>=4.4.2",
+  "langchain-ollama>=1.1.0",
+  "langfuse>=5.0.2",
+  "openpyxl>=3.1.5",
+  "pdfplumber>=0.11.10",
+  "psycopg[binary]>=3.3.6",
+  "pydantic>=2.14.1",
+  "pydantic-settings>=2.16.0",
+  "pyjwt>=2.15.1",
+  "python-docx>=1.2.0",
+  "sqlalchemy>=2.1.5",
+  "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+api = "backend:main"
 
 [dependency-groups]
 dev = ["pytest>=9.1.1", "ruff>=0.17.1"]
 
-[tool.uv.workspace]
-members = ["packages/*"]
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13"]
+build-backend = "uv_build"
 
-[tool.uv.sources]
-backend = { workspace = true }
-frontend = { workspace = true }
+[tool.uv.build-backend]
+module-name = "backend"
+module-root = "packages/backend/src"
