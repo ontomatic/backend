@@ -1,4 +1,8 @@
+from typing import Literal
+
 from pydantic import BaseModel, Field
+
+from backend.schemas.workflow import DocumentKind
 
 
 class UploadFileDetail(BaseModel):
@@ -7,6 +11,7 @@ class UploadFileDetail(BaseModel):
 
 
 class UploadFilesIn(BaseModel):
+  kind: DocumentKind | Literal['auto']
   files: list[UploadFileDetail] = Field(min_length=1, max_length=10)
 
 

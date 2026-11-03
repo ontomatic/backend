@@ -30,8 +30,10 @@ def create_files(session: Session, *, uploader_id: int, bucket: str, items: list
   return files
 
 
-def get_file_by_file_id(session: Session, *, file_id: int) -> File | None:
+def get_file_by_file_id(session: Session, *, file_id: int, lock: bool = False) -> File | None:
   statement = select(File).where(File.id == file_id)
+  if lock:
+    statement = statement.with_for_update()
   return session.scalar(statement)
 
 

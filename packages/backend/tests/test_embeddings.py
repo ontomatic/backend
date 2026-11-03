@@ -5,6 +5,8 @@ import pytest
 from backend.core.config import Settings
 from backend.integrations import graph
 from backend.integrations.embeddings import factory, ollama, upstage
+from backend.models.workflow import Specification
+from backend.services import rag
 from pydantic import SecretStr, ValidationError
 
 
@@ -163,3 +165,58 @@ def test_vector_index_preserves_ollama_and_separates_providers(
   assert upstage_index != original
   settings.embedding_model = 'other-model'
   assert graph.vector_index() not in (original, upstage_index)
+
+
+@pytest.mark.parametrize('fail_request', [False, True])
+def test_rag_indexing_uses_document_embeddings_and_records_provider_independent_errors(
+  workspace: dict, api_settings: Settings, monkeypatch: pytest.MonkeyPatch, fail_request: bool
+) -> None:
+  # Given a submitted specification with enough source chunks to require two embedding batches.
+  with workspace['factory']() as session:
+    specification = Specification(
+      code='EMBED',
+      name='임베딩 검증',
+      product_type='digital',
+      status='submitted',
+      graph={'items': [], 'relations': []},
+      created_by=workspace['users']['rd'].id,
+    )
+    session.add(specification)
+    session.commit()
+    specification_id = specification.id
+  monkeypatch.setattr(api_settings, 'graph_rag_enabled', True)
+  chunks = [{'id': str(index), 'text': f'source {index}', 'item_keys': []} for index in range(17)]
+  monkeypatch.setattr(rag, 'document_chunks', lambda *args: chunks)
+  monkeypatch.setattr(rag, 'vector_index', lambda: 'ontomatic_vectors_test')
+  batches = []
+  queries = []
+
+  class Embedder:
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+      batches.append(texts)
+      if fail_request:
+        raise URLError('offline')
+      return [[1.0, 0.0] for _ in texts]
+
+  monkeypatch.setattr(rag, 'create_embedder', Embedder)
+  monkeypatch.setattr(rag, 'cypher', lambda statement, parameters=None: queries.append((statement, parameters)))
+
+  # When indexing the specification through the public service.
+  rag.index_specification(specification_id)
+
+  # Then document batches are embedded and only validated vectors are marked as ready for this index.
+  with workspace['factory']() as session:
+    saved = session.get(Specification, specification_id)
+    assert saved.index_status == ('error' if fail_request else 'ready')
+    if fail_request:
+      assert saved.index_error and '임베딩' in saved.index_error
+      assert not queries
+    else:
+      assert saved.index_error is None
+      assert [len(batch) for batch in batches] == [16, 1]
+      indexed = [
+        chunk for _, parameters in queries if parameters and 'chunks' in parameters for chunk in parameters['chunks']
+      ]
+      assert len(indexed) == len(chunks)
+      assert all(chunk['embedding_index'] == 'ontomatic_vectors_test' for chunk in indexed)
+      assert all(chunk['embedding'] == [1.0, 0.0] for chunk in indexed)

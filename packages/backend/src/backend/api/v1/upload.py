@@ -8,7 +8,7 @@ router = APIRouter(prefix='/uploads', tags=['upload'])
 
 @router.post('', response_model=list[UploadFileOut])
 def issue_upload_urls(user_id: CurrentUserId, body: UploadFilesIn) -> list[UploadFileOut]:
-  return get_upload_urls(user_id, body.files)
+  return get_upload_urls(user_id, body.files, body.kind)
 
 
 @router.post('/{file_id}/complete', status_code=204)

@@ -8,6 +8,7 @@ from typing import Protocol
 class ObjectInfo:
   size: int
   content_type: str
+  etag: str | None = None
 
 
 class Storage(Protocol):
@@ -18,10 +19,13 @@ class Storage(Protocol):
   def download(self, key: str, destination: BytesIO) -> None: ...
 
   @abstractmethod
+  def copy(self, source_key: str, destination_key: str, *, source_etag: str | None = None) -> None: ...
+
+  @abstractmethod
   def delete(self, key: str) -> None: ...
 
   @abstractmethod
-  def get_download_url(self, key: str, *, expires_in: int = 3600) -> str: ...
+  def get_download_url(self, key: str, *, filename: str, expires_in: int = 3600) -> str: ...
 
   @abstractmethod
   def get_object_info(self, key: str) -> ObjectInfo: ...
