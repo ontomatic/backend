@@ -3,9 +3,11 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from backend.api.v1 import router
+from backend.core.config import get_settings
 from backend.core.logger import setup_logger
 from backend.exceptions.base import AppException
 from backend.integrations.langfuse import initialize_langfuse, shutdown_langfuse
@@ -26,6 +28,15 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 app = FastAPI(
   lifespan=lifespan,
   responses={422: {'model': ErrorOut}},
+)
+
+app.add_middleware(
+  CORSMiddleware,
+  allow_origin_regex=(
+    r'https?://(localhost|127\.0\.0\.1)(:[0-9]+)?' if get_settings().app_env in ('local', 'dev') else None
+  ),
+  allow_methods=['*'],
+  allow_headers=['Authorization', 'Content-Type'],
 )
 
 
