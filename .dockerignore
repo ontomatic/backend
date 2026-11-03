@@ -1,0 +1,14 @@
+**
+!pyproject.toml
+!uv.lock
+!README.md
+!.python-version
+!packages/
+!packages/backend/
+!packages/backend/src/
+!packages/backend/src/**
+!packages/backend/alembic.ini
+**/.env
+**/.env.*
+**/__pycache__/
+**/*.py[cod]
