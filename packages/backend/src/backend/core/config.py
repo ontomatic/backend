@@ -41,6 +41,10 @@ class Settings(BaseSettings):
   google_api_key: SecretStr | None = None
   anthropic_api_key: SecretStr | None = None
 
+  parser_provider: Literal['local', 'upstage'] = 'local'
+  upstage_api_key: SecretStr | None = None
+  upstage_base_url: str = 'https://api.upstage.ai/v1'
+
   s3_endpoint_url: str = 'http://localhost:9000'
   s3_region: str = 'us-east-1'
   s3_access_key_id: SecretStr
