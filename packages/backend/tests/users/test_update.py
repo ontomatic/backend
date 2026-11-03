@@ -19,6 +19,7 @@ def test_update_user_fields(admin_client: TestClient, db_session: Session, targe
   body: dict[str, object] = {}
   expected_name = target_user.name
   expected_department_id = target_user.department_id
+  expected_department_code = target_user.department.code
   expected_department_name = target_user.department.name
   original_hash = target_user.password_hash
   if fields in ('name', 'both'):
@@ -28,6 +29,7 @@ def test_update_user_fields(admin_client: TestClient, db_session: Session, targe
     production = create_department(db_session, code='production', name='생산관리')
     body['department_id'] = production.id
     expected_department_id = production.id
+    expected_department_code = production.code
     expected_department_name = production.name
 
   # when
@@ -39,7 +41,7 @@ def test_update_user_fields(admin_client: TestClient, db_session: Session, targe
     'id': target_user.id,
     'emp_id': 'TARGET001',
     'name': expected_name,
-    'department': {'id': expected_department_id, 'name': expected_department_name},
+    'department': {'id': expected_department_id, 'code': expected_department_code, 'name': expected_department_name},
     'role': 'user',
     'is_active': True,
   }

@@ -31,7 +31,7 @@ def test_list_search_filters_and_pagination(admin_client: TestClient, db_session
         'id': matching.id,
         'emp_id': 'EMP001',
         'name': '홍길동',
-        'department': {'id': department.id, 'name': department.name},
+        'department': {'id': department.id, 'code': department.code, 'name': department.name},
         'role': 'user',
         'is_active': True,
       }

@@ -29,7 +29,7 @@ def test_create_user_and_login(
     'id': stored_user.id,
     'emp_id': 'New001',
     'name': '신규 사용자',
-    'department': {'id': user_create_body['department_id'], 'name': '연구개발'},
+    'department': {'id': user_create_body['department_id'], 'code': 'research', 'name': '연구개발'},
     'role': 'user',
     'is_active': True,
   }
