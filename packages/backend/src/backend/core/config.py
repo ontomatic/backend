@@ -37,6 +37,13 @@ class Settings(BaseSettings):
   llm_provider: Literal['ollama', 'google', 'anthropic'] = 'ollama'
   llm_model: str = 'llama3.2'
   ollama_base_url: str = 'http://localhost:11434'
+  embedding_provider: Literal['ollama', 'upstage'] = 'ollama'
+  embedding_model: str = 'qwen3-embedding:0.6b'
+  graph_rag_enabled: bool = False
+  neo4j_url: str = 'http://localhost:7474'
+  neo4j_database: str = 'neo4j'
+  neo4j_user: str = 'neo4j'
+  neo4j_password: SecretStr | None = None
 
   google_api_key: SecretStr | None = None
   anthropic_api_key: SecretStr | None = None
