@@ -1,0 +1,287 @@
+{
+  "file": "07_작업 순서 (2차 모듈).docx",
+  "model": "LO-D200",
+  "scope": "document",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "LO-D100 구조를 바탕으로 만든 합성 평가용 가상 모델이다. 자료 태그는 합성 입력 d200.json의 값을 뜻하며 회사 제공 원본 자료가 아니다. 생성기 입력(d200.json, cgs_models.json)에서 build_cgs.js 와 같은 규칙으로 make_golden.py 가 만든 초안 (2026-11-03). 추출기 출력과 독립. 이 문서(표지·부록 없는 파일)에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 적었다(채점하지 않음). 사람 검수 후 status 를 reviewed 로 바꾼다. 렌즈·본체 공정은 공정번호 하나 안을 단계로 나눠 적었다(여러 줄이 같은 공정번호). 단계는 tasks[].steps 에 순서대로 두고, 공정 이름은 공정 칸 둘째 줄의 '(렌즈 조립)', 투입은 첫 단계·산출은 마지막 단계 값, 확인 내용은 확인 내용이 적힌 단계의 값이다. 공정 하나의 작업 내용(work)과 단계(stage)는 적혀 있지 않다.",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "model",
+    "productName",
+    "specVersion",
+    "plannedQty",
+    "completedQty",
+    "documents[].dept",
+    "people[].dept",
+    "people[].role",
+    "modules[].qty",
+    "modules[].start",
+    "modules[].end",
+    "modules[].next",
+    "modules[].leader",
+    "modules[].badCause",
+    "tasks[].stage",
+    "tasks[].start",
+    "tasks[].end",
+    "tasks[].days",
+    "tasks[].preds",
+    "tasks[].owner",
+    "tasks[].assistants",
+    "tasks[].crew",
+    "tasks[].work",
+    "tasks[].inQty",
+    "tasks[].good",
+    "tasks[].bad",
+    "tasks[].qcDoc"
+  ],
+  "src": {
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.버전": "설계",
+    "documents[].meta.발행일": "가상",
+    "documents[].meta.근거 부품표": "설계",
+    "people[].name": "가상",
+    "people[].title": "가상",
+    "modules[].name": "설계",
+    "modules[].level": "설계",
+    "tasks[].id": "설계",
+    "tasks[].name": "자료",
+    "tasks[].module": "설계",
+    "tasks[].line": "자료",
+    "tasks[].input": "자료",
+    "tasks[].output": "자료",
+    "tasks[].check": "설계",
+    "tasks[].routeDoc": "설계",
+    "tasks[].steps": "설계"
+  },
+  "expected": {
+    "documents": [
+      {
+        "no": "순서-07",
+        "title": "작업 순서 (2차 모듈)",
+        "kind": "route",
+        "version": "1.0",
+        "date": "2026-11-24",
+        "meta": {
+          "문서번호": "순서-07",
+          "버전": "1.0",
+          "발행일": "2026-11-24",
+          "근거 부품표": "BOM-02 버전 1.0"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "배성민",
+            "title": "선임",
+            "date": "2026-11-24"
+          },
+          {
+            "role": "검토",
+            "name": "최우석",
+            "title": "생산팀장",
+            "date": "2026-11-24"
+          },
+          {
+            "role": "승인",
+            "name": "권상혁",
+            "title": "부서장",
+            "date": "2026-11-24"
+          }
+        ],
+        "basedOn": "BOM-02",
+        "verdict": null
+      }
+    ],
+    "people": [
+      {
+        "name": "배성민",
+        "title": "선임"
+      },
+      {
+        "name": "최우석",
+        "title": "생산팀장"
+      },
+      {
+        "name": "권상혁",
+        "title": "부서장"
+      }
+    ],
+    "parts": [],
+    "modules": [
+      {
+        "name": "렌즈 공정",
+        "level": "2차 모듈"
+      },
+      {
+        "name": "본체 공정",
+        "level": "2차 모듈"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "공정-08",
+        "name": "렌즈 조립",
+        "module": "렌즈 공정",
+        "line": "광학 검사실",
+        "input": "광학부, 경통부",
+        "output": "렌즈",
+        "check": "MTF 확인",
+        "routeDoc": "순서-07",
+        "steps": [
+          {
+            "name": "투입 확인·세척",
+            "work": "광학부·경통부 수량과 외관을 확인하고 렌즈면과 경통 안쪽 먼지를 제거",
+            "input": "광학부, 경통부",
+            "output": "광학부, 경통부 (세척 완료)",
+            "check": null
+          },
+          {
+            "name": "광학부 삽입",
+            "work": "광학부를 경통부 안쪽 정위치에 넣음",
+            "input": "광학부, 경통부 (세척 완료)",
+            "output": "렌즈 (광학부 삽입)",
+            "check": null
+          },
+          {
+            "name": "광학부 고정",
+            "work": "고정 링을 조여 광학부를 경통부에 고정",
+            "input": "렌즈 (광학부 삽입)",
+            "output": "렌즈 (광학부 고정)",
+            "check": null
+          },
+          {
+            "name": "광축 조정",
+            "work": "광축 중심을 맞추고 기울어짐을 조정",
+            "input": "렌즈 (광학부 고정)",
+            "output": "렌즈 (광축 조정)",
+            "check": null
+          },
+          {
+            "name": "초점 링 조정",
+            "work": "초점 링을 끝까지 돌려 걸림 없이 움직이는지 확인하고 조정",
+            "input": "렌즈 (광축 조정)",
+            "output": "렌즈 (링 조정)",
+            "check": null
+          },
+          {
+            "name": "MTF 검사",
+            "work": "광학 검사실에서 MTF를 측정",
+            "input": "렌즈 (링 조정)",
+            "output": "렌즈",
+            "check": "MTF 확인"
+          }
+        ]
+      },
+      {
+        "id": "공정-14",
+        "name": "본체 조립",
+        "module": "본체 공정",
+        "line": "최종 조립 라인",
+        "input": "센서부, 셔터부, 화면부, 전원부, 외장부",
+        "output": "본체",
+        "check": "센서 정렬·셔터 연동 기능 확인",
+        "routeDoc": "순서-07",
+        "steps": [
+          {
+            "name": "투입 확인",
+            "work": "센서부·셔터부·화면부·전원부·외장부 수량과 외관을 확인하고 작업대에 배치",
+            "input": "센서부, 셔터부, 화면부, 전원부, 외장부",
+            "output": "센서부, 셔터부, 화면부, 전원부, 외장부 (확인 완료)",
+            "check": null
+          },
+          {
+            "name": "외장부 거치",
+            "work": "외장부를 조립 지그에 올려 고정",
+            "input": "외장부",
+            "output": "본체 (외장부 거치)",
+            "check": null
+          },
+          {
+            "name": "전원부 장착",
+            "work": "전원부를 외장부 안쪽 배터리실에 넣고 접점 단자를 연결",
+            "input": "본체 (외장부 거치), 전원부",
+            "output": "본체 (전원부 장착)",
+            "check": null
+          },
+          {
+            "name": "셔터부 장착",
+            "work": "셔터부를 본체 앞쪽 정위치에 장착",
+            "input": "본체 (전원부 장착), 셔터부",
+            "output": "본체 (셔터부 장착)",
+            "check": null
+          },
+          {
+            "name": "센서부 장착·정렬",
+            "work": "센서부를 셔터부 뒤쪽에 장착하고 센서면 기울기를 정렬",
+            "input": "본체 (셔터부 장착), 센서부",
+            "output": "본체 (센서부 장착)",
+            "check": null
+          },
+          {
+            "name": "화면부 장착",
+            "work": "화면부를 본체 뒤쪽에 맞추고 연결 단자를 결합",
+            "input": "본체 (센서부 장착), 화면부",
+            "output": "본체 (화면부 장착)",
+            "check": null
+          },
+          {
+            "name": "외장부 결합·체결",
+            "work": "외장부를 닫고 외장부에 딸린 나사로 체결",
+            "input": "본체 (화면부 장착)",
+            "output": "본체 (체결 완료)",
+            "check": null
+          },
+          {
+            "name": "기능 검사",
+            "work": "전원을 넣고 센서 정렬 상태와 셔터 연동 기능을 확인",
+            "input": "본체 (체결 완료)",
+            "output": "본체",
+            "check": "센서 정렬·셔터 연동 기능 확인"
+          }
+        ]
+      }
+    ],
+    "iqc": [],
+    "inspections": [],
+    "units": [],
+    "handover": []
+  }
+}

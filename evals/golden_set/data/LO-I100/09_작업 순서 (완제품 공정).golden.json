@@ -1,0 +1,207 @@
+{
+  "file": "09_작업 순서 (완제품 공정).docx",
+  "model": "LO-I100",
+  "scope": "document",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "생성기 입력(i100.json, cgs_models.json)에서 build_cgs.js 와 같은 규칙으로 make_golden.py 가 만든 초안 (2026-11-03). 추출기 출력과 독립. 이 문서(표지·부록 없는 파일)에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 적었다(채점하지 않음). 사람 검수 후 status 를 reviewed 로 바꾼다. 완제품 공정은 공정번호 하나 안을 단계로 나눠 적었다. 정답 규칙은 작업 순서 (2차 모듈)과 같다 (steps, 공정 이름은 둘째 줄, 투입은 첫 단계·산출은 마지막 단계).",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "model",
+    "productName",
+    "specVersion",
+    "plannedQty",
+    "completedQty",
+    "documents[].dept",
+    "people[].dept",
+    "people[].role",
+    "modules[].level",
+    "modules[].qty",
+    "modules[].start",
+    "modules[].end",
+    "modules[].next",
+    "modules[].leader",
+    "modules[].badCause",
+    "tasks[].stage",
+    "tasks[].start",
+    "tasks[].end",
+    "tasks[].days",
+    "tasks[].preds",
+    "tasks[].owner",
+    "tasks[].assistants",
+    "tasks[].crew",
+    "tasks[].work",
+    "tasks[].inQty",
+    "tasks[].good",
+    "tasks[].bad",
+    "tasks[].qcDoc"
+  ],
+  "src": {
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.버전": "설계",
+    "documents[].meta.발행일": "가상",
+    "documents[].meta.근거 부품표": "설계",
+    "people[].name": "가상",
+    "people[].title": "가상",
+    "modules[].name": "설계",
+    "tasks[].id": "설계",
+    "tasks[].name": "자료",
+    "tasks[].module": "설계",
+    "tasks[].line": "자료",
+    "tasks[].input": "자료",
+    "tasks[].output": "자료",
+    "tasks[].check": "설계",
+    "tasks[].routeDoc": "설계",
+    "tasks[].steps": "설계"
+  },
+  "expected": {
+    "documents": [
+      {
+        "no": "순서-09",
+        "title": "작업 순서 (완제품 공정)",
+        "kind": "route",
+        "version": "1.0",
+        "date": "2026-11-17",
+        "meta": {
+          "문서번호": "순서-09",
+          "버전": "1.0",
+          "발행일": "2026-11-17",
+          "근거 부품표": "BOM-02 버전 1.0"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "배성민",
+            "title": "선임",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "검토",
+            "name": "최우석",
+            "title": "생산팀장",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "승인",
+            "name": "권상혁",
+            "title": "부서장",
+            "date": "2026-11-17"
+          }
+        ],
+        "basedOn": "BOM-02",
+        "verdict": null
+      }
+    ],
+    "people": [
+      {
+        "name": "배성민",
+        "title": "선임"
+      },
+      {
+        "name": "최우석",
+        "title": "생산팀장"
+      },
+      {
+        "name": "권상혁",
+        "title": "부서장"
+      }
+    ],
+    "parts": [],
+    "modules": [
+      {
+        "name": "완제품 공정"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "공정-09",
+        "name": "최종 검사",
+        "module": "완제품 공정",
+        "line": "검사실",
+        "input": "본체",
+        "output": "카메라 LO-I100",
+        "check": "최종 검사 점검표 확인",
+        "routeDoc": "순서-09",
+        "steps": [
+          {
+            "name": "투입 확인",
+            "work": "본체 수량과 외관을 확인",
+            "input": "본체",
+            "output": "본체 (확인 완료)",
+            "check": null
+          },
+          {
+            "name": "제품번호 부여",
+            "work": "제품번호를 부여해 기록",
+            "input": "본체 (확인 완료)",
+            "output": "카메라 (제품번호 부여)",
+            "check": null
+          },
+          {
+            "name": "전원·셔터 확인",
+            "work": "전원을 켜고 셔터 개폐를 확인",
+            "input": "카메라 (제품번호 부여)",
+            "output": "카메라 (셔터 확인)",
+            "check": null
+          },
+          {
+            "name": "노출·필름 배출 확인",
+            "work": "시험 필름으로 노출과 필름 배출을 확인",
+            "input": "카메라 (셔터 확인)",
+            "output": "카메라 (노출·배출 확인)",
+            "check": null
+          },
+          {
+            "name": "외관 점검·최종 판정",
+            "work": "긁힘과 마감 상태를 보고 점검표를 작성한 뒤 최종 판정",
+            "input": "카메라 (노출·배출 확인)",
+            "output": "카메라 LO-I100",
+            "check": "최종 검사 점검표 확인"
+          }
+        ]
+      }
+    ],
+    "iqc": [],
+    "inspections": [],
+    "units": [],
+    "handover": []
+  }
+}

@@ -1,0 +1,424 @@
+{
+  "file": "10_검사성적서 (완제품).docx",
+  "model": "LO-I100",
+  "scope": "document",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "생성기 입력(i100.json, cgs_models.json)에서 build_cgs.js 와 같은 규칙으로 make_golden.py 가 만든 초안 (2026-11-03). 추출기 출력과 독립. 이 문서(표지·부록 없는 파일)에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 적었다(채점하지 않음). 사람 검수 후 status 를 reviewed 로 바꾼다. 단계별 수량 종합표의 비고는 불량이 나온 공정의 불량 원인이고(modules[].badCause), 불량이 없으면 빈칸(null)이다.",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "model",
+    "productName",
+    "specVersion",
+    "plannedQty",
+    "documents[].dept",
+    "people[].dept",
+    "people[박도윤].title",
+    "people[노세아].title",
+    "people[].role",
+    "modules[].qty",
+    "modules[].start",
+    "modules[].end",
+    "modules[].next",
+    "tasks[].stage",
+    "tasks[].start",
+    "tasks[].end",
+    "tasks[].days",
+    "tasks[].preds",
+    "tasks[].owner",
+    "tasks[].assistants",
+    "tasks[].crew",
+    "tasks[].line",
+    "tasks[].work",
+    "tasks[].input",
+    "tasks[].output",
+    "tasks[].check",
+    "tasks[].routeDoc",
+    "tasks[].steps"
+  ],
+  "src": {
+    "completedQty": "가상",
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.검사일": "설계",
+    "documents[].meta.대상 품목": "설계",
+    "documents[].meta.공정책임자": "가상",
+    "documents[].meta.제품번호": "설계",
+    "documents[].meta.완성 수량": "가상",
+    "people[].name": "가상",
+    "people[].title": "가상",
+    "modules[].name": "설계",
+    "modules[].level": "설계",
+    "modules[].leader": "가상",
+    "modules[].badCause": "가상",
+    "tasks[].id": "설계",
+    "tasks[].name": "자료",
+    "tasks[].module": "설계",
+    "tasks[].inQty": "가상",
+    "tasks[].good": "가상",
+    "tasks[].bad": "가상",
+    "tasks[].qcDoc": "설계",
+    "inspections[].doc": "설계",
+    "inspections[].item": "가상",
+    "inspections[].taskId": "설계",
+    "inspections[].standard": "가상",
+    "inspections[].value": "가상",
+    "inspections[].inspector": "가상",
+    "inspections[].verdict": "가상",
+    "units[].serial": "설계",
+    "units[].checks": "가상"
+  },
+  "expected": {
+    "completedQty": 978,
+    "documents": [
+      {
+        "no": "검사-10",
+        "title": "검사성적서 (완제품)",
+        "kind": "qc",
+        "version": null,
+        "date": "2026-12-03",
+        "meta": {
+          "문서번호": "검사-10",
+          "검사일": "2026-12-03",
+          "대상 품목": "LO-I100 카메라",
+          "공정책임자": "박도윤",
+          "제품번호": "LO-I100-001 ~ LO-I100-982",
+          "완성 수량": "978대"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "한예준",
+            "title": "주임",
+            "date": "2026-12-03"
+          },
+          {
+            "role": "검토",
+            "name": "차민서",
+            "title": "품질팀장",
+            "date": "2026-12-03"
+          },
+          {
+            "role": "승인",
+            "name": "오세영",
+            "title": "부서장",
+            "date": "2026-12-03"
+          }
+        ],
+        "basedOn": null,
+        "verdict": "합격"
+      }
+    ],
+    "people": [
+      {
+        "name": "한예준",
+        "title": "주임"
+      },
+      {
+        "name": "차민서",
+        "title": "품질팀장"
+      },
+      {
+        "name": "오세영",
+        "title": "부서장"
+      },
+      {
+        "name": "박도윤"
+      },
+      {
+        "name": "노세아"
+      }
+    ],
+    "parts": [],
+    "modules": [
+      {
+        "name": "완제품 공정",
+        "level": "완제품",
+        "leader": "박도윤",
+        "badCause": "점검표 항목 부적합(노출·필름 배출 등)"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "공정-09",
+        "name": "최종 검사",
+        "module": "완제품 공정",
+        "inQty": 982,
+        "good": 978,
+        "bad": 4,
+        "qcDoc": "검사-10"
+      }
+    ],
+    "iqc": [],
+    "inspections": [
+      {
+        "doc": "검사-10",
+        "item": "최종 검사",
+        "taskId": "공정-09",
+        "standard": "아래 제품번호별 점검표 전 항목 OK",
+        "value": "978대 기준 충족\n4대 미달",
+        "inspector": "노세아",
+        "verdict": "합격"
+      }
+    ],
+    "units": [
+      {
+        "serial": "LO-I100-166",
+        "checks": [
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-03",
+              "공정-07"
+            ],
+            "item": "외장 커버",
+            "standard": "긁힘·도장 벗겨짐 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "나사·와셔 체결",
+            "standard": "나사 8개·와셔 8개 빠짐·헛돔 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "제품 라벨·로고 플레이트",
+            "standard": "정위치 부착, 모델명 LO-I100 표기",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-06",
+              "공정-08"
+            ],
+            "item": "전원",
+            "standard": "전원이 켜지고 동작 표시가 정상일 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-08"
+            ],
+            "item": "셔터 개폐",
+            "standard": "셔터가 걸림 없이 열고 닫힐 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-09"
+            ],
+            "item": "노출",
+            "standard": "약 100mm급 내장 렌즈로 찍은 시험 필름의 노출이 적정할 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-08",
+              "공정-09"
+            ],
+            "item": "필름 배출",
+            "standard": "필름이 걸림 없이 배출될 것",
+            "result": "OK"
+          }
+        ]
+      },
+      {
+        "serial": "LO-I100-351",
+        "checks": [
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-03",
+              "공정-07"
+            ],
+            "item": "외장 커버",
+            "standard": "긁힘·도장 벗겨짐 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "나사·와셔 체결",
+            "standard": "나사 8개·와셔 8개 빠짐·헛돔 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "제품 라벨·로고 플레이트",
+            "standard": "정위치 부착, 모델명 LO-I100 표기",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-06",
+              "공정-08"
+            ],
+            "item": "전원",
+            "standard": "전원이 켜지고 동작 표시가 정상일 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-08"
+            ],
+            "item": "셔터 개폐",
+            "standard": "셔터가 걸림 없이 열고 닫힐 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-09"
+            ],
+            "item": "노출",
+            "standard": "약 100mm급 내장 렌즈로 찍은 시험 필름의 노출이 적정할 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-08",
+              "공정-09"
+            ],
+            "item": "필름 배출",
+            "standard": "필름이 걸림 없이 배출될 것",
+            "result": "OK"
+          }
+        ]
+      },
+      {
+        "serial": "LO-I100-377",
+        "checks": [
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-03",
+              "공정-07"
+            ],
+            "item": "외장 커버",
+            "standard": "긁힘·도장 벗겨짐 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "나사·와셔 체결",
+            "standard": "나사 8개·와셔 8개 빠짐·헛돔 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "제품 라벨·로고 플레이트",
+            "standard": "정위치 부착, 모델명 LO-I100 표기",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-06",
+              "공정-08"
+            ],
+            "item": "전원",
+            "standard": "전원이 켜지고 동작 표시가 정상일 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-08"
+            ],
+            "item": "셔터 개폐",
+            "standard": "셔터가 걸림 없이 열고 닫힐 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-09"
+            ],
+            "item": "노출",
+            "standard": "약 100mm급 내장 렌즈로 찍은 시험 필름의 노출이 적정할 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-08",
+              "공정-09"
+            ],
+            "item": "필름 배출",
+            "standard": "필름이 걸림 없이 배출될 것",
+            "result": "OK"
+          }
+        ]
+      }
+    ],
+    "handover": []
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "file": "03_수입검사성적서.docx",
+  "model": "LO-D100",
+  "scope": "document",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "생성기 입력(d100.json, cgs_models.json)에서 build_cgs.js 와 같은 규칙으로 make_golden.py 가 만든 초안 (2026-11-03). 추출기 출력과 독립. 이 문서(표지·부록 없는 파일)에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 적었다(채점하지 않음). 사람 검수 후 status 를 reviewed 로 바꾼다.",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "model",
+    "productName",
+    "specVersion",
+    "completedQty",
+    "documents[].dept",
+    "people[].dept",
+    "people[].role"
+  ],
+  "src": {
+    "plannedQty": "자료",
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.버전": "설계",
+    "documents[].meta.검사일": "설계",
+    "documents[].meta.검사 담당": "가상",
+    "documents[].meta.입고 수량": "자료",
+    "people[].name": "가상",
+    "people[].title": "가상",
+    "iqc[].part": "자료",
+    "iqc[].qty": "가상",
+    "iqc[].check": "가상",
+    "iqc[].verdict": "가상"
+  },
+  "expected": {
+    "plannedQty": 500,
+    "documents": [
+      {
+        "no": "수입검사-03",
+        "title": "수입검사성적서",
+        "kind": "iqc",
+        "version": "1.0",
+        "date": "2026-10-29",
+        "meta": {
+          "문서번호": "수입검사-03",
+          "버전": "1.0",
+          "검사일": "2026-10-28 ~ 2026-10-29",
+          "검사 담당": "조은서 주임",
+          "입고 수량": "500대분"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "조은서",
+            "title": "주임",
+            "date": "2026-10-29"
+          },
+          {
+            "role": "검토",
+            "name": "차민서",
+            "title": "품질팀장",
+            "date": "2026-10-29"
+          },
+          {
+            "role": "승인",
+            "name": "오세영",
+            "title": "부서장",
+            "date": "2026-10-29"
+          }
+        ],
+        "basedOn": null,
+        "verdict": "합격"
+      }
+    ],
+    "people": [
+      {
+        "name": "조은서",
+        "title": "주임"
+      },
+      {
+        "name": "차민서",
+        "title": "품질팀장"
+      },
+      {
+        "name": "오세영",
+        "title": "부서장"
+      }
+    ],
+    "parts": [],
+    "modules": [],
+    "tasks": [],
+    "iqc": [
+      {
+        "part": "센서 칩",
+        "qty": 500,
+        "check": "수량·로트 표기 대조, 정전기 방지 포장 개봉 상태, 수광면 이물·긁힘, 칩 외형 치수",
+        "verdict": "합격"
+      },
+      {
+        "part": "보호 유리",
+        "qty": 500,
+        "check": "코팅면 얼룩·기포·박리, 빛 투과율(분광 측정), 두께·외경, 조명 아래 긁힘",
+        "verdict": "합격"
+      },
+      {
+        "part": "보호 커버",
+        "qty": 500,
+        "check": "표면 긁힘·깨짐·기포, 두께·외형 치수, 모서리 가공 상태",
+        "verdict": "합격"
+      },
+      {
+        "part": "접점 단자",
+        "qty": 1500,
+        "check": "도금 변색·산화, 접점 접촉 저항, 핀 휨·변형",
+        "verdict": "합격"
+      },
+      {
+        "part": "패킹",
+        "qty": 500,
+        "check": "찢김·기포·성형 찌꺼기(버), 단면 두께, 눌렀다 놓았을 때 복원",
+        "verdict": "합격"
+      },
+      {
+        "part": "그립",
+        "qty": 500,
+        "check": "표면 끈적임·이염, 경도, 접착면 오염",
+        "verdict": "합격"
+      },
+      {
+        "part": "단자 덮개",
+        "qty": 500,
+        "check": "찢김·성형 불량, 여닫을 때 복원과 걸림, 외형 치수",
+        "verdict": "합격"
+      },
+      {
+        "part": "O링",
+        "qty": 1000,
+        "check": "내경·선경, 갈라진 곳(크랙)·성형선, 경도",
+        "verdict": "합격"
+      },
+      {
+        "part": "나사",
+        "qty": 6000,
+        "check": "나사산 규격(M2 게이지 통과), 길이 5 mm, 머리 파손·녹",
+        "verdict": "합격"
+      },
+      {
+        "part": "와셔",
+        "qty": 6000,
+        "check": "내경·외경·두께, 가장자리 버, 녹 얼룩",
+        "verdict": "합격"
+      },
+      {
+        "part": "스트랩 고리",
+        "qty": 1000,
+        "check": "절단·접합부 마감, 잡아당길 때 벌어짐·변형, 표면 녹",
+        "verdict": "합격"
+      },
+      {
+        "part": "제품 라벨",
+        "qty": 500,
+        "check": "인쇄 번짐, 모델명·문구 오탈자, 접착력",
+        "verdict": "합격"
+      },
+      {
+        "part": "로고 플레이트",
+        "qty": 500,
+        "check": "로고 각인 선명도·색상, 표면 긁힘·산화, 접착면 상태",
+        "verdict": "합격"
+      },
+      {
+        "part": "스트랩",
+        "qty": 500,
+        "check": "폭 20 mm·길이 1,000 mm, 재봉 풀림, 색상 균일",
+        "verdict": "합격"
+      }
+    ],
+    "inspections": [],
+    "units": [],
+    "handover": []
+  }
+}

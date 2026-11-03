@@ -1,0 +1,322 @@
+{
+  "file": "01_제품사양서.docx",
+  "model": "LO-I100",
+  "scope": "document",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "생성기 입력(i100.json, cgs_models.json)에서 build_cgs.js 와 같은 규칙으로 make_golden.py 가 만든 초안 (2026-11-03). 추출기 출력과 독립. 이 문서(표지·부록 없는 파일)에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 적었다(채점하지 않음). 사람 검수 후 status 를 reviewed 로 바꾼다.",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "plannedQty",
+    "completedQty",
+    "documents[].dept",
+    "people[].dept",
+    "people[].role",
+    "parts[].seq",
+    "parts[].code",
+    "parts[].spec",
+    "parts[].qtyPerUnit",
+    "parts[].sourcing",
+    "parts[].supplier",
+    "parts[].taskId",
+    "parts[].module"
+  ],
+  "src": {
+    "model": "자료",
+    "productName": "자료",
+    "specVersion": "자료",
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.버전": "설계",
+    "documents[].meta.발행일": "가상",
+    "documents[].meta.담당": "가상",
+    "people[].name": "가상",
+    "people[].title": "가상",
+    "parts[].name": "자료",
+    "parts[].accessory": "자료",
+    "parts[].detail": "자료",
+    "parts[].attrs": "자료",
+    "documents[사양-01].version": "자료",
+    "documents[사양-01].meta.버전": "자료"
+  },
+  "expected": {
+    "model": "LO-I100",
+    "productName": "즉석 카메라",
+    "specVersion": "2.0",
+    "documents": [
+      {
+        "no": "사양-01",
+        "title": "제품사양서",
+        "kind": "spec",
+        "version": "2.0",
+        "date": "2026-11-13",
+        "meta": {
+          "문서번호": "사양-01",
+          "버전": "2.0",
+          "발행일": "2026-11-13",
+          "담당": "광학팀 문가은 선임연구원"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "문가은",
+            "title": "선임연구원",
+            "date": "2026-11-13"
+          },
+          {
+            "role": "검토",
+            "name": "서현우",
+            "title": "부서장",
+            "date": "2026-11-13"
+          },
+          {
+            "role": "승인",
+            "name": "정태호",
+            "title": "대표이사",
+            "date": "2026-11-13"
+          }
+        ],
+        "basedOn": null,
+        "verdict": null
+      }
+    ],
+    "people": [
+      {
+        "name": "문가은",
+        "title": "선임연구원"
+      },
+      {
+        "name": "서현우",
+        "title": "부서장"
+      },
+      {
+        "name": "정태호",
+        "title": "대표이사"
+      }
+    ],
+    "parts": [
+      {
+        "name": "렌즈",
+        "accessory": false,
+        "detail": "약 100mm급 내장 렌즈",
+        "attrs": {
+          "재질": "광학용 폴리카보네이트·PMMA"
+        }
+      },
+      {
+        "name": "경통",
+        "accessory": false,
+        "detail": "본체 일체형 렌즈 하우징",
+        "attrs": {
+          "재질": "PC/ABS"
+        }
+      },
+      {
+        "name": "셔터막",
+        "accessory": false,
+        "detail": "렌즈 셔터 방식 개폐 블레이드",
+        "attrs": {
+          "재질": "흑색 코팅 스테인리스강 박판"
+        }
+      },
+      {
+        "name": "셔터 프레임",
+        "accessory": false,
+        "detail": "렌즈 하우징 내부 셔터 지지부",
+        "attrs": {
+          "재질": "유리섬유 강화 PBT"
+        }
+      },
+      {
+        "name": "센서 칩",
+        "accessory": false,
+        "detail": "해당 없음 - 즉석필름으로 기록",
+        "attrs": {
+          "재질": "해당 없음"
+        }
+      },
+      {
+        "name": "보호 유리",
+        "accessory": false,
+        "detail": "해당 없음",
+        "attrs": {
+          "재질": "해당 없음"
+        }
+      },
+      {
+        "name": "보호 커버",
+        "accessory": false,
+        "detail": "해당 없음 - LCD 미탑재",
+        "attrs": {
+          "재질": "해당 없음"
+        }
+      },
+      {
+        "name": "디스플레이 프레임",
+        "accessory": false,
+        "detail": "해당 없음 - LCD 미탑재",
+        "attrs": {
+          "재질": "해당 없음"
+        }
+      },
+      {
+        "name": "배터리 케이스",
+        "accessory": false,
+        "detail": "내장 셀 고정 케이스",
+        "attrs": {
+          "재질": "ABS"
+        }
+      },
+      {
+        "name": "접점 단자",
+        "accessory": false,
+        "detail": "배터리 전원 연결용 단자",
+        "attrs": {
+          "재질": "구리 합금"
+        }
+      },
+      {
+        "name": "O링",
+        "accessory": false,
+        "detail": "충전 단자부 밀폐용 O링",
+        "attrs": {
+          "재질": "NBR 고무"
+        }
+      },
+      {
+        "name": "외장 커버",
+        "accessory": false,
+        "detail": "필름 배출구 포함 외장 커버",
+        "attrs": {
+          "재질": "PC/ABS"
+        }
+      },
+      {
+        "name": "그립",
+        "accessory": false,
+        "detail": "손잡이 미끄럼 방지 부품",
+        "attrs": {
+          "재질": "실리콘 고무"
+        }
+      },
+      {
+        "name": "단자 덮개",
+        "accessory": false,
+        "detail": "충전 단자 보호 덮개",
+        "attrs": {
+          "재질": "실리콘 고무"
+        }
+      },
+      {
+        "name": "패킹",
+        "accessory": false,
+        "detail": "필름 도어 밀폐 패킹",
+        "attrs": {
+          "재질": "실리콘 고무"
+        }
+      },
+      {
+        "name": "나사",
+        "accessory": false,
+        "detail": "외장·프레임 조립용 대표 나사",
+        "attrs": {
+          "재질": "스테인리스강",
+          "규격": "M2 × 5 mm"
+        }
+      },
+      {
+        "name": "와셔",
+        "accessory": false,
+        "detail": "체결면 하중 분산용 평와셔",
+        "attrs": {
+          "재질": "스테인리스강"
+        }
+      },
+      {
+        "name": "스트랩 고리",
+        "accessory": false,
+        "detail": "본체와 스트랩 연결용 고리",
+        "attrs": {
+          "재질": "스테인리스강"
+        }
+      },
+      {
+        "name": "제품 라벨",
+        "accessory": false,
+        "detail": "모델명·제조번호 표시 라벨",
+        "attrs": {
+          "재질": "PET"
+        }
+      },
+      {
+        "name": "로고 플레이트",
+        "accessory": false,
+        "detail": "온토메틱 브랜드 표시판",
+        "attrs": {
+          "재질": "알루미늄"
+        }
+      },
+      {
+        "name": "렌즈 캡",
+        "accessory": true,
+        "detail": "렌즈 전면 탈착식 보호 캡",
+        "attrs": {
+          "재질": "ABS",
+          "직경": "58 mm"
+        }
+      },
+      {
+        "name": "스트랩",
+        "accessory": true,
+        "detail": "카메라 휴대용 목걸이 스트랩",
+        "attrs": {
+          "재질": "나일론",
+          "폭·길이": "20 × 1,000 mm"
+        }
+      }
+    ],
+    "modules": [],
+    "tasks": [],
+    "iqc": [],
+    "inspections": [],
+    "units": [],
+    "handover": []
+  }
+}

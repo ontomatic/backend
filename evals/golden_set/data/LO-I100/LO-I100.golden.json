@@ -1,0 +1,1714 @@
+{
+  "file": [
+    "01_제품사양서.docx",
+    "02_BOM 및 양산 이관.docx",
+    "03_수입검사성적서.docx",
+    "04_생산계획서.docx",
+    "05_작업 순서 (1차 모듈).docx",
+    "06_검사성적서 (1차 모듈).docx",
+    "07_작업 순서 (2차 모듈).docx",
+    "08_검사성적서 (2차 모듈).docx",
+    "09_작업 순서 (완제품 공정).docx",
+    "10_검사성적서 (완제품).docx"
+  ],
+  "model": "LO-I100",
+  "scope": "model",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "생성기 입력(i100.json, cgs_models.json)에서 make_golden.py 가 만든 모델 합본 초안 (2026-11-03). 문서 10개의 문서별 정답을 합치고(같은 항목 값이 문서마다 같은지 확인), 부품의 모듈·부속품 여부(엑셀 '제품 구성' 시트, 문서에서는 사양서 소제목·작업 순서 투입 목록으로 이어 알 수 있음)를 더했다. 사양서에만 있는 '해당 없음' 부품 줄은 이 제품의 부품이 아니라 뺐다. 표지가 없는 파일이라 documents[].dept 는 없고, people[].role 은 조직표가 들어 있는 BOM 및 양산 이관 문서의 사람에만 있다. 생산계획 표의 완제품 줄은 작업자 배정표와 같은 '완제품 공정'이다(수량은 '1,000대'처럼 쉼표, 정답은 숫자). 생산계획 표에 비고 열이 없어 모듈의 다음 모듈(next)은 어느 문서에도 적혀 있지 않다. 구매 부품 입고·수입검사는 공정번호가 없고 작업 일정에도 없다. 공정책임자·담당자·보조담당자는 이름만 적혀 있어 people 에는 이름만 둔다.",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "documents[].dept",
+    "people[고승우].dept",
+    "people[문세아].dept",
+    "people[한다인].dept",
+    "people[채선우].dept",
+    "people[심시우].dept",
+    "people[방성민].dept",
+    "people[양지아].dept",
+    "people[하다인].dept",
+    "people[전은지].dept",
+    "people[손주원].dept",
+    "people[여소연].dept",
+    "people[방유나].dept",
+    "people[최지유].dept",
+    "people[성하은].dept",
+    "people[배지후].dept",
+    "people[이동현].dept",
+    "people[노세아].dept",
+    "people[방시윤].dept",
+    "people[고승우].title",
+    "people[문세아].title",
+    "people[한다인].title",
+    "people[채선우].title",
+    "people[심시우].title",
+    "people[방성민].title",
+    "people[양지아].title",
+    "people[하다인].title",
+    "people[전은지].title",
+    "people[손주원].title",
+    "people[여소연].title",
+    "people[방유나].title",
+    "people[최지유].title",
+    "people[성하은].title",
+    "people[배지후].title",
+    "people[이동현].title",
+    "people[노세아].title",
+    "people[방시윤].title",
+    "people[고승우].role",
+    "people[문세아].role",
+    "people[한다인].role",
+    "people[채선우].role",
+    "people[심시우].role",
+    "people[방성민].role",
+    "people[양지아].role",
+    "people[하다인].role",
+    "people[전은지].role",
+    "people[손주원].role",
+    "people[여소연].role",
+    "people[방유나].role",
+    "people[최지유].role",
+    "people[성하은].role",
+    "people[배지후].role",
+    "people[이동현].role",
+    "people[노세아].role",
+    "people[방시윤].role",
+    "modules[].next",
+    "tasks[공정-08].stage",
+    "tasks[공정-09].stage",
+    "tasks[공정-08].work",
+    "tasks[공정-09].work",
+    "tasks[공정-01].steps",
+    "tasks[공정-02].steps",
+    "tasks[공정-03].steps",
+    "tasks[공정-04].steps",
+    "tasks[공정-05].steps",
+    "tasks[공정-06].steps",
+    "tasks[공정-07].steps"
+  ],
+  "src": {
+    "model": "자료",
+    "productName": "자료",
+    "specVersion": "자료",
+    "plannedQty": "자료",
+    "completedQty": "가상",
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.버전": "설계",
+    "documents[].meta.발행일": "가상",
+    "documents[].meta.담당": "가상",
+    "documents[].meta.상위 모델": "자료",
+    "documents[].meta.근거 부품표": "설계",
+    "documents[].meta.검사일": "설계",
+    "documents[].meta.검사 담당": "가상",
+    "documents[].meta.입고 수량": "자료",
+    "documents[].meta.대상 품목": "설계",
+    "documents[].meta.공정책임자": "가상",
+    "documents[].meta.제품번호": "설계",
+    "documents[].meta.완성 수량": "가상",
+    "people[].name": "가상",
+    "people[].dept": "가상",
+    "people[].title": "가상",
+    "people[].role": "가상",
+    "parts[].seq": "설계",
+    "parts[].code": "설계",
+    "parts[].name": "자료",
+    "parts[].spec": "자료",
+    "parts[].qtyPerUnit": "가상",
+    "parts[].sourcing": "자료",
+    "parts[].supplier": "가상",
+    "parts[].taskId": "설계",
+    "parts[].module": "자료",
+    "parts[].accessory": "자료",
+    "parts[].detail": "자료",
+    "parts[].attrs": "자료",
+    "modules[].name": "설계",
+    "modules[].level": "설계",
+    "modules[].qty": "자료",
+    "modules[].start": "설계",
+    "modules[].end": "설계",
+    "modules[].leader": "가상",
+    "modules[].badCause": "가상",
+    "tasks[].id": "설계",
+    "tasks[].name": "자료",
+    "tasks[].stage": "자료",
+    "tasks[].start": "설계",
+    "tasks[].end": "설계",
+    "tasks[].days": "자료",
+    "tasks[].preds": "자료",
+    "tasks[].module": "설계",
+    "tasks[].owner": "가상",
+    "tasks[].assistants": "가상",
+    "tasks[].crew": "가상",
+    "tasks[].line": "자료",
+    "tasks[].work": "자료",
+    "tasks[].input": "자료",
+    "tasks[].output": "자료",
+    "tasks[].check": "설계",
+    "tasks[].inQty": "가상",
+    "tasks[].good": "가상",
+    "tasks[].bad": "가상",
+    "tasks[].routeDoc": "설계",
+    "tasks[].qcDoc": "설계",
+    "tasks[].steps": "설계",
+    "iqc[].part": "자료",
+    "iqc[].qty": "가상",
+    "iqc[].check": "가상",
+    "iqc[].verdict": "가상",
+    "inspections[].doc": "설계",
+    "inspections[].item": "가상",
+    "inspections[].taskId": "설계",
+    "inspections[].standard": "가상",
+    "inspections[].value": "가상",
+    "inspections[].inspector": "가상",
+    "inspections[].verdict": "가상",
+    "units[].serial": "설계",
+    "units[].checks": "가상",
+    "handover[].item": "설계",
+    "handover[].owner": "가상",
+    "handover[].status": "가상",
+    "documents[사양-01].version": "자료",
+    "documents[사양-01].meta.버전": "자료"
+  },
+  "expected": {
+    "model": "LO-I100",
+    "productName": "즉석 카메라",
+    "specVersion": "2.0",
+    "plannedQty": 1000,
+    "completedQty": 978,
+    "documents": [
+      {
+        "no": "사양-01",
+        "title": "제품사양서",
+        "kind": "spec",
+        "version": "2.0",
+        "date": "2026-11-13",
+        "meta": {
+          "문서번호": "사양-01",
+          "버전": "2.0",
+          "발행일": "2026-11-13",
+          "담당": "광학팀 문가은 선임연구원"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "문가은",
+            "title": "선임연구원",
+            "date": "2026-11-13"
+          },
+          {
+            "role": "검토",
+            "name": "서현우",
+            "title": "부서장",
+            "date": "2026-11-13"
+          },
+          {
+            "role": "승인",
+            "name": "정태호",
+            "title": "대표이사",
+            "date": "2026-11-13"
+          }
+        ],
+        "basedOn": null,
+        "verdict": null
+      },
+      {
+        "no": "BOM-02",
+        "title": "BOM 및 양산 이관",
+        "kind": "bom",
+        "version": "1.0",
+        "date": "2026-11-17",
+        "meta": {
+          "문서번호": "BOM-02",
+          "버전": "1.0",
+          "발행일": "2026-11-17",
+          "상위 모델": "LO-I100"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "문가은",
+            "title": "선임연구원",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "검토",
+            "name": "류지성",
+            "title": "광학팀장",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "승인",
+            "name": "서현우",
+            "title": "부서장",
+            "date": "2026-11-17"
+          }
+        ],
+        "basedOn": null,
+        "verdict": null
+      },
+      {
+        "no": "수입검사-03",
+        "title": "수입검사성적서",
+        "kind": "iqc",
+        "version": "1.0",
+        "date": "2026-11-19",
+        "meta": {
+          "문서번호": "수입검사-03",
+          "버전": "1.0",
+          "검사일": "2026-11-18 ~ 2026-11-19",
+          "검사 담당": "조은서 주임",
+          "입고 수량": "1000대분"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "조은서",
+            "title": "주임",
+            "date": "2026-11-19"
+          },
+          {
+            "role": "검토",
+            "name": "차민서",
+            "title": "품질팀장",
+            "date": "2026-11-19"
+          },
+          {
+            "role": "승인",
+            "name": "오세영",
+            "title": "부서장",
+            "date": "2026-11-19"
+          }
+        ],
+        "basedOn": null,
+        "verdict": "합격"
+      },
+      {
+        "no": "계획-04",
+        "title": "생산계획서",
+        "kind": "plan",
+        "version": "1.0",
+        "date": "2026-11-17",
+        "meta": {
+          "문서번호": "계획-04",
+          "버전": "1.0",
+          "발행일": "2026-11-17",
+          "근거 부품표": "BOM-02 버전 1.0"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "홍지원",
+            "title": "대리",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "검토",
+            "name": "최우석",
+            "title": "생산팀장",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "승인",
+            "name": "권상혁",
+            "title": "부서장",
+            "date": "2026-11-17"
+          }
+        ],
+        "basedOn": "BOM-02",
+        "verdict": null
+      },
+      {
+        "no": "순서-05",
+        "title": "작업 순서 (1차 모듈)",
+        "kind": "route",
+        "version": "1.0",
+        "date": "2026-11-17",
+        "meta": {
+          "문서번호": "순서-05",
+          "버전": "1.0",
+          "발행일": "2026-11-17",
+          "근거 부품표": "BOM-02 버전 1.0"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "배성민",
+            "title": "선임",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "검토",
+            "name": "최우석",
+            "title": "생산팀장",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "승인",
+            "name": "권상혁",
+            "title": "부서장",
+            "date": "2026-11-17"
+          }
+        ],
+        "basedOn": "BOM-02",
+        "verdict": null
+      },
+      {
+        "no": "검사-06",
+        "title": "검사성적서 (1차 모듈)",
+        "kind": "qc",
+        "version": null,
+        "date": "2026-11-26",
+        "meta": {
+          "문서번호": "검사-06",
+          "검사일": "2026-11-26",
+          "대상 품목": "3개",
+          "공정책임자": "이서준"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "한예준",
+            "title": "주임",
+            "date": "2026-11-26"
+          },
+          {
+            "role": "검토",
+            "name": "차민서",
+            "title": "품질팀장",
+            "date": "2026-11-26"
+          },
+          {
+            "role": "승인",
+            "name": "오세영",
+            "title": "부서장",
+            "date": "2026-11-26"
+          }
+        ],
+        "basedOn": null,
+        "verdict": "합격"
+      },
+      {
+        "no": "순서-07",
+        "title": "작업 순서 (2차 모듈)",
+        "kind": "route",
+        "version": "1.0",
+        "date": "2026-11-17",
+        "meta": {
+          "문서번호": "순서-07",
+          "버전": "1.0",
+          "발행일": "2026-11-17",
+          "근거 부품표": "BOM-02 버전 1.0"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "배성민",
+            "title": "선임",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "검토",
+            "name": "최우석",
+            "title": "생산팀장",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "승인",
+            "name": "권상혁",
+            "title": "부서장",
+            "date": "2026-11-17"
+          }
+        ],
+        "basedOn": "BOM-02",
+        "verdict": null
+      },
+      {
+        "no": "검사-08",
+        "title": "검사성적서 (2차 모듈)",
+        "kind": "qc",
+        "version": null,
+        "date": "2026-12-01",
+        "meta": {
+          "문서번호": "검사-08",
+          "검사일": "2026-12-01",
+          "대상 품목": "1개",
+          "공정책임자": "김민준"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "한예준",
+            "title": "주임",
+            "date": "2026-12-01"
+          },
+          {
+            "role": "검토",
+            "name": "차민서",
+            "title": "품질팀장",
+            "date": "2026-12-01"
+          },
+          {
+            "role": "승인",
+            "name": "오세영",
+            "title": "부서장",
+            "date": "2026-12-01"
+          }
+        ],
+        "basedOn": null,
+        "verdict": "합격"
+      },
+      {
+        "no": "순서-09",
+        "title": "작업 순서 (완제품 공정)",
+        "kind": "route",
+        "version": "1.0",
+        "date": "2026-11-17",
+        "meta": {
+          "문서번호": "순서-09",
+          "버전": "1.0",
+          "발행일": "2026-11-17",
+          "근거 부품표": "BOM-02 버전 1.0"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "배성민",
+            "title": "선임",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "검토",
+            "name": "최우석",
+            "title": "생산팀장",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "승인",
+            "name": "권상혁",
+            "title": "부서장",
+            "date": "2026-11-17"
+          }
+        ],
+        "basedOn": "BOM-02",
+        "verdict": null
+      },
+      {
+        "no": "검사-10",
+        "title": "검사성적서 (완제품)",
+        "kind": "qc",
+        "version": null,
+        "date": "2026-12-03",
+        "meta": {
+          "문서번호": "검사-10",
+          "검사일": "2026-12-03",
+          "대상 품목": "LO-I100 카메라",
+          "공정책임자": "박도윤",
+          "제품번호": "LO-I100-001 ~ LO-I100-982",
+          "완성 수량": "978대"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "한예준",
+            "title": "주임",
+            "date": "2026-12-03"
+          },
+          {
+            "role": "검토",
+            "name": "차민서",
+            "title": "품질팀장",
+            "date": "2026-12-03"
+          },
+          {
+            "role": "승인",
+            "name": "오세영",
+            "title": "부서장",
+            "date": "2026-12-03"
+          }
+        ],
+        "basedOn": null,
+        "verdict": "합격"
+      }
+    ],
+    "people": [
+      {
+        "name": "문가은",
+        "dept": "R&D부서",
+        "title": "선임연구원",
+        "role": "제품사양서·BOM 작성, 제품 설계"
+      },
+      {
+        "name": "서현우",
+        "dept": "R&D부서",
+        "title": "부서장",
+        "role": "제품사양서 검토, BOM 승인, 양산 이관 서명"
+      },
+      {
+        "name": "정태호",
+        "dept": "경영",
+        "title": "대표이사",
+        "role": "제품사양서 승인"
+      },
+      {
+        "name": "류지성",
+        "dept": "R&D부서",
+        "title": "광학팀장",
+        "role": "BOM 검토, 첫 시제품 시험"
+      },
+      {
+        "name": "배성민",
+        "dept": "생산부서",
+        "title": "선임",
+        "role": "작업 순서 문서 작성 (생산기술)"
+      },
+      {
+        "name": "최우석",
+        "dept": "생산부서",
+        "title": "생산팀장",
+        "role": "생산계획서·작업 순서 검토, 작업자 교육"
+      },
+      {
+        "name": "권상혁",
+        "dept": "생산부서",
+        "title": "부서장",
+        "role": "생산계획서·작업 순서 승인, 양산 이관 서명"
+      },
+      {
+        "name": "오세영",
+        "dept": "품질부서",
+        "title": "부서장",
+        "role": "수입검사·검사성적서 승인, 양산 이관 서명"
+      },
+      {
+        "name": "홍지원",
+        "dept": "생산부서",
+        "title": "대리",
+        "role": "생산계획서 작성 (생산관리)"
+      },
+      {
+        "name": "차민서",
+        "dept": "품질부서",
+        "title": "품질팀장",
+        "role": "수입검사·검사성적서 검토"
+      },
+      {
+        "name": "조은서",
+        "dept": "품질부서",
+        "title": "주임",
+        "role": "수입검사성적서 작성, 구매 부품 검사"
+      },
+      {
+        "name": "한예준",
+        "dept": "품질부서",
+        "title": "주임",
+        "role": "검사성적서 (1차 모듈·2차 모듈·완제품) 작성"
+      },
+      {
+        "name": "이서준",
+        "dept": "생산부서",
+        "title": "파트장",
+        "role": "1차 모듈 공정 책임"
+      },
+      {
+        "name": "김민준",
+        "dept": "생산부서",
+        "title": "파트장",
+        "role": "2차 모듈 공정 책임"
+      },
+      {
+        "name": "박도윤",
+        "dept": "생산부서",
+        "title": "파트장",
+        "role": "완제품 공정 책임"
+      },
+      {
+        "name": "고승우"
+      },
+      {
+        "name": "문세아"
+      },
+      {
+        "name": "한다인"
+      },
+      {
+        "name": "채선우"
+      },
+      {
+        "name": "심시우"
+      },
+      {
+        "name": "방성민"
+      },
+      {
+        "name": "양지아"
+      },
+      {
+        "name": "하다인"
+      },
+      {
+        "name": "전은지"
+      },
+      {
+        "name": "손주원"
+      },
+      {
+        "name": "여소연"
+      },
+      {
+        "name": "방유나"
+      },
+      {
+        "name": "최지유"
+      },
+      {
+        "name": "성하은"
+      },
+      {
+        "name": "배지후"
+      },
+      {
+        "name": "이동현"
+      },
+      {
+        "name": "노세아"
+      },
+      {
+        "name": "방시윤"
+      }
+    ],
+    "parts": [
+      {
+        "seq": 1,
+        "code": "부품-01",
+        "name": "렌즈",
+        "spec": "광학용 폴리카보네이트·PMMA",
+        "qtyPerUnit": 3,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-01",
+        "module": "렌즈·셔터 공정",
+        "accessory": false,
+        "detail": "약 100mm급 내장 렌즈",
+        "attrs": {
+          "재질": "광학용 폴리카보네이트·PMMA"
+        }
+      },
+      {
+        "seq": 2,
+        "code": "부품-02",
+        "name": "경통",
+        "spec": "PC/ABS",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-03",
+        "module": "렌즈·셔터 공정",
+        "accessory": false,
+        "detail": "본체 일체형 렌즈 하우징",
+        "attrs": {
+          "재질": "PC/ABS"
+        }
+      },
+      {
+        "seq": 3,
+        "code": "부품-03",
+        "name": "셔터막",
+        "spec": "흑색 코팅 스테인리스강 박판",
+        "qtyPerUnit": 2,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-02",
+        "module": "렌즈·셔터 공정",
+        "accessory": false,
+        "detail": "렌즈 셔터 방식 개폐 블레이드",
+        "attrs": {
+          "재질": "흑색 코팅 스테인리스강 박판"
+        }
+      },
+      {
+        "seq": 4,
+        "code": "부품-04",
+        "name": "셔터 프레임",
+        "spec": "유리섬유 강화 PBT",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-02",
+        "module": "렌즈·셔터 공정",
+        "accessory": false,
+        "detail": "렌즈 하우징 내부 셔터 지지부",
+        "attrs": {
+          "재질": "유리섬유 강화 PBT"
+        }
+      },
+      {
+        "seq": 5,
+        "code": "부품-05",
+        "name": "배터리 케이스",
+        "spec": "ABS",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-04",
+        "module": "전원 공정",
+        "accessory": false,
+        "detail": "내장 셀 고정 케이스",
+        "attrs": {
+          "재질": "ABS"
+        }
+      },
+      {
+        "seq": 6,
+        "code": "부품-06",
+        "name": "접점 단자",
+        "spec": "구리 합금",
+        "qtyPerUnit": 2,
+        "sourcing": "구매",
+        "supplier": "㈜한국전자부품",
+        "taskId": null,
+        "module": "전원 공정",
+        "accessory": false,
+        "detail": "배터리 전원 연결용 단자",
+        "attrs": {
+          "재질": "구리 합금"
+        }
+      },
+      {
+        "seq": 7,
+        "code": "부품-07",
+        "name": "O링",
+        "spec": "NBR 고무",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국고무",
+        "taskId": null,
+        "module": "전원 공정",
+        "accessory": false,
+        "detail": "충전 단자부 밀폐용 O링",
+        "attrs": {
+          "재질": "NBR 고무"
+        }
+      },
+      {
+        "seq": 8,
+        "code": "부품-08",
+        "name": "외장 커버",
+        "spec": "PC/ABS",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-03",
+        "module": "외장 공정",
+        "accessory": false,
+        "detail": "필름 배출구 포함 외장 커버",
+        "attrs": {
+          "재질": "PC/ABS"
+        }
+      },
+      {
+        "seq": 9,
+        "code": "부품-09",
+        "name": "그립",
+        "spec": "실리콘 고무",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국고무",
+        "taskId": null,
+        "module": "외장 공정",
+        "accessory": false,
+        "detail": "손잡이 미끄럼 방지 부품",
+        "attrs": {
+          "재질": "실리콘 고무"
+        }
+      },
+      {
+        "seq": 10,
+        "code": "부품-10",
+        "name": "단자 덮개",
+        "spec": "실리콘 고무",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국고무",
+        "taskId": null,
+        "module": "외장 공정",
+        "accessory": false,
+        "detail": "충전 단자 보호 덮개",
+        "attrs": {
+          "재질": "실리콘 고무"
+        }
+      },
+      {
+        "seq": 11,
+        "code": "부품-11",
+        "name": "패킹",
+        "spec": "실리콘 고무",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국고무",
+        "taskId": null,
+        "module": "외장 공정",
+        "accessory": false,
+        "detail": "필름 도어 밀폐 패킹",
+        "attrs": {
+          "재질": "실리콘 고무"
+        }
+      },
+      {
+        "seq": 12,
+        "code": "부품-12",
+        "name": "나사",
+        "spec": "스테인리스강, 규격 M2 × 5 mm",
+        "qtyPerUnit": 8,
+        "sourcing": "구매",
+        "supplier": "㈜한국패스너",
+        "taskId": null,
+        "module": "외장 공정",
+        "accessory": false,
+        "detail": "외장·프레임 조립용 대표 나사",
+        "attrs": {
+          "재질": "스테인리스강",
+          "규격": "M2 × 5 mm"
+        }
+      },
+      {
+        "seq": 13,
+        "code": "부품-13",
+        "name": "와셔",
+        "spec": "스테인리스강",
+        "qtyPerUnit": 8,
+        "sourcing": "구매",
+        "supplier": "㈜한국패스너",
+        "taskId": null,
+        "module": "외장 공정",
+        "accessory": false,
+        "detail": "체결면 하중 분산용 평와셔",
+        "attrs": {
+          "재질": "스테인리스강"
+        }
+      },
+      {
+        "seq": 14,
+        "code": "부품-14",
+        "name": "스트랩 고리",
+        "spec": "스테인리스강",
+        "qtyPerUnit": 2,
+        "sourcing": "구매",
+        "supplier": "㈜한국패스너",
+        "taskId": null,
+        "module": "외장 공정",
+        "accessory": false,
+        "detail": "본체와 스트랩 연결용 고리",
+        "attrs": {
+          "재질": "스테인리스강"
+        }
+      },
+      {
+        "seq": 15,
+        "code": "부품-15",
+        "name": "제품 라벨",
+        "spec": "PET",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국인쇄",
+        "taskId": null,
+        "module": "외장 공정",
+        "accessory": false,
+        "detail": "모델명·제조번호 표시 라벨",
+        "attrs": {
+          "재질": "PET"
+        }
+      },
+      {
+        "seq": 16,
+        "code": "부품-16",
+        "name": "로고 플레이트",
+        "spec": "알루미늄",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국인쇄",
+        "taskId": null,
+        "module": "외장 공정",
+        "accessory": false,
+        "detail": "온토메틱 브랜드 표시판",
+        "attrs": {
+          "재질": "알루미늄"
+        }
+      },
+      {
+        "seq": 17,
+        "code": "부품-17",
+        "name": "렌즈 캡",
+        "spec": "ABS, 직경 58 mm",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-04",
+        "module": null,
+        "accessory": true,
+        "detail": "렌즈 전면 탈착식 보호 캡",
+        "attrs": {
+          "재질": "ABS",
+          "직경": "58 mm"
+        }
+      },
+      {
+        "seq": 18,
+        "code": "부품-18",
+        "name": "스트랩",
+        "spec": "나일론, 폭·길이 20 × 1,000 mm",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국섬유",
+        "taskId": null,
+        "module": null,
+        "accessory": true,
+        "detail": "카메라 휴대용 목걸이 스트랩",
+        "attrs": {
+          "재질": "나일론",
+          "폭·길이": "20 × 1,000 mm"
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "렌즈·셔터 공정",
+        "level": "1차 모듈",
+        "qty": 1000,
+        "start": "2026-11-18",
+        "end": "2026-11-26",
+        "leader": "이서준",
+        "badCause": "렌즈 사출 기포·흠집, 셔터 개폐 동작 불량"
+      },
+      {
+        "name": "전원 공정",
+        "level": "1차 모듈",
+        "qty": 1000,
+        "start": "2026-11-18",
+        "end": "2026-11-20",
+        "leader": "이서준",
+        "badCause": null
+      },
+      {
+        "name": "외장 공정",
+        "level": "1차 모듈",
+        "qty": 1000,
+        "start": "2026-11-18",
+        "end": "2026-11-25",
+        "leader": "이서준",
+        "badCause": "하우징 사출 변형·도장 불량"
+      },
+      {
+        "name": "본체 공정",
+        "level": "2차 모듈",
+        "qty": 1000,
+        "start": "2026-11-27",
+        "end": "2026-12-01",
+        "leader": "김민준",
+        "badCause": "필름 배출 구동·셔터 연동 불량"
+      },
+      {
+        "name": "완제품 공정",
+        "level": "완제품",
+        "qty": 1000,
+        "start": "2026-12-02",
+        "end": "2026-12-03",
+        "leader": "박도윤",
+        "badCause": "점검표 항목 부적합(노출·필름 배출 등)"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "공정-01",
+        "name": "렌즈 성형",
+        "stage": "부품 준비",
+        "start": "2026-11-18",
+        "end": "2026-11-20",
+        "days": 3,
+        "preds": [],
+        "module": "렌즈·셔터 공정",
+        "owner": "고승우",
+        "assistants": [
+          "문세아"
+        ],
+        "crew": 3,
+        "line": "사출 성형 라인",
+        "work": "광학용 PC·PMMA 렌즈 사출 성형",
+        "input": "원자재",
+        "output": "렌즈",
+        "check": null,
+        "inQty": 1000,
+        "good": 994,
+        "bad": 6,
+        "routeDoc": "순서-05",
+        "qcDoc": "검사-06"
+      },
+      {
+        "id": "공정-02",
+        "name": "셔터 부품 가공",
+        "stage": "부품 준비",
+        "start": "2026-11-18",
+        "end": "2026-11-20",
+        "days": 3,
+        "preds": [],
+        "module": "렌즈·셔터 공정",
+        "owner": "한다인",
+        "assistants": [],
+        "crew": 2,
+        "line": "기구 가공 라인",
+        "work": "스테인리스 블레이드 프레스·흑색 코팅, PBT 사출",
+        "input": "원자재",
+        "output": "셔터막, 셔터 프레임",
+        "check": null,
+        "inQty": 1000,
+        "good": 1000,
+        "bad": 0,
+        "routeDoc": "순서-05",
+        "qcDoc": "검사-06"
+      },
+      {
+        "id": "공정-03",
+        "name": "외장·하우징 성형",
+        "stage": "부품 준비",
+        "start": "2026-11-18",
+        "end": "2026-11-23",
+        "days": 4,
+        "preds": [],
+        "module": "외장 공정",
+        "owner": "손주원",
+        "assistants": [
+          "여소연"
+        ],
+        "crew": 3,
+        "line": "사출 성형 라인",
+        "work": "PC/ABS 외장 커버·렌즈 하우징 사출·도장",
+        "input": "원자재",
+        "output": "외장 커버, 경통",
+        "check": null,
+        "inQty": 1000,
+        "good": 998,
+        "bad": 2,
+        "routeDoc": "순서-05",
+        "qcDoc": "검사-06"
+      },
+      {
+        "id": "공정-04",
+        "name": "사출 부품 성형",
+        "stage": "부품 준비",
+        "start": "2026-11-18",
+        "end": "2026-11-19",
+        "days": 2,
+        "preds": [],
+        "module": "전원 공정",
+        "owner": "양지아",
+        "assistants": [
+          "하다인"
+        ],
+        "crew": 3,
+        "line": "사출 성형 라인",
+        "work": "ABS 사출 성형",
+        "input": "원자재",
+        "output": "배터리 케이스, 렌즈 캡",
+        "check": null,
+        "inQty": 1000,
+        "good": 1000,
+        "bad": 0,
+        "routeDoc": "순서-05",
+        "qcDoc": "검사-06"
+      },
+      {
+        "id": "공정-05",
+        "name": "렌즈·셔터 조립",
+        "stage": "1차 모듈 조립",
+        "start": "2026-11-24",
+        "end": "2026-11-26",
+        "days": 3,
+        "preds": [
+          "공정-01",
+          "공정-02",
+          "공정-03"
+        ],
+        "module": "렌즈·셔터 공정",
+        "owner": "채선우",
+        "assistants": [
+          "심시우",
+          "방성민"
+        ],
+        "crew": 4,
+        "line": "클린룸 조립실",
+        "work": "내장 렌즈·하우징·셔터 블레이드 조립, 개폐 검사",
+        "input": "렌즈, 경통, 셔터막, 셔터 프레임",
+        "output": "렌즈·셔터부",
+        "check": "셔터 개폐 동작 확인",
+        "inQty": 994,
+        "good": 986,
+        "bad": 8,
+        "routeDoc": "순서-05",
+        "qcDoc": "검사-06"
+      },
+      {
+        "id": "공정-06",
+        "name": "전원 조립",
+        "stage": "1차 모듈 조립",
+        "start": "2026-11-20",
+        "end": "2026-11-20",
+        "days": 1,
+        "preds": [
+          "공정-04"
+        ],
+        "module": "전원 공정",
+        "owner": "전은지",
+        "assistants": [],
+        "crew": 2,
+        "line": "모듈 조립 라인",
+        "work": "배터리 케이스·접점 단자·밀폐재 조립",
+        "input": "배터리 케이스, 접점 단자, O링",
+        "output": "전원부",
+        "check": null,
+        "inQty": 1000,
+        "good": 1000,
+        "bad": 0,
+        "routeDoc": "순서-05",
+        "qcDoc": "검사-06"
+      },
+      {
+        "id": "공정-07",
+        "name": "외장 조립",
+        "stage": "1차 모듈 조립",
+        "start": "2026-11-24",
+        "end": "2026-11-25",
+        "days": 2,
+        "preds": [
+          "공정-03"
+        ],
+        "module": "외장 공정",
+        "owner": "방유나",
+        "assistants": [
+          "최지유"
+        ],
+        "crew": 3,
+        "line": "모듈 조립 라인",
+        "work": "외장 커버·그립·덮개·체결·표시재 조립",
+        "input": "외장 커버, 그립, 단자 덮개, 패킹, 나사, 와셔, 스트랩 고리, 제품 라벨, 로고 플레이트",
+        "output": "외장부",
+        "check": null,
+        "inQty": 998,
+        "good": 998,
+        "bad": 0,
+        "routeDoc": "순서-05",
+        "qcDoc": "검사-06"
+      },
+      {
+        "id": "공정-08",
+        "name": "본체 조립",
+        "start": "2026-11-27",
+        "end": "2026-12-01",
+        "days": 3,
+        "preds": [
+          "공정-05",
+          "공정-06",
+          "공정-07"
+        ],
+        "module": "본체 공정",
+        "owner": "성하은",
+        "assistants": [
+          "배지후",
+          "이동현"
+        ],
+        "crew": 4,
+        "line": "최종 조립 라인",
+        "input": "렌즈·셔터부, 전원부, 외장부",
+        "output": "본체",
+        "check": "필름 배출 구동·셔터 연동 확인",
+        "inQty": 986,
+        "good": 982,
+        "bad": 4,
+        "routeDoc": "순서-07",
+        "qcDoc": "검사-08",
+        "steps": [
+          {
+            "name": "투입 확인",
+            "work": "렌즈·셔터부·전원부·외장부 수량과 외관을 확인하고 작업대에 배치",
+            "input": "렌즈·셔터부, 전원부, 외장부",
+            "output": "렌즈·셔터부, 전원부, 외장부 (확인 완료)",
+            "check": null
+          },
+          {
+            "name": "외장부 거치",
+            "work": "외장부를 조립 지그에 올려 고정",
+            "input": "외장부",
+            "output": "본체 (외장부 거치)",
+            "check": null
+          },
+          {
+            "name": "전원부 장착",
+            "work": "전원부를 외장부 안쪽에 넣고 접점 단자를 연결",
+            "input": "본체 (외장부 거치), 전원부",
+            "output": "본체 (전원부 장착)",
+            "check": null
+          },
+          {
+            "name": "렌즈·셔터부 장착",
+            "work": "렌즈·셔터부를 외장부 앞쪽 정위치에 장착",
+            "input": "본체 (전원부 장착), 렌즈·셔터부",
+            "output": "본체 (렌즈·셔터부 장착)",
+            "check": null
+          },
+          {
+            "name": "외장부 결합·체결",
+            "work": "외장부를 닫고 외장부에 딸린 나사로 체결",
+            "input": "본체 (렌즈·셔터부 장착)",
+            "output": "본체 (체결 완료)",
+            "check": null
+          },
+          {
+            "name": "기능 검사",
+            "work": "필름 배출 구동과 셔터 연동을 확인",
+            "input": "본체 (체결 완료)",
+            "output": "본체",
+            "check": "필름 배출 구동·셔터 연동 확인"
+          }
+        ]
+      },
+      {
+        "id": "공정-09",
+        "name": "최종 검사",
+        "start": "2026-12-02",
+        "end": "2026-12-03",
+        "days": 2,
+        "preds": [
+          "공정-08"
+        ],
+        "module": "완제품 공정",
+        "owner": "노세아",
+        "assistants": [
+          "방시윤"
+        ],
+        "crew": 3,
+        "line": "검사실",
+        "input": "본체",
+        "output": "카메라 LO-I100",
+        "check": "최종 검사 점검표 확인",
+        "inQty": 982,
+        "good": 978,
+        "bad": 4,
+        "routeDoc": "순서-09",
+        "qcDoc": "검사-10",
+        "steps": [
+          {
+            "name": "투입 확인",
+            "work": "본체 수량과 외관을 확인",
+            "input": "본체",
+            "output": "본체 (확인 완료)",
+            "check": null
+          },
+          {
+            "name": "제품번호 부여",
+            "work": "제품번호를 부여해 기록",
+            "input": "본체 (확인 완료)",
+            "output": "카메라 (제품번호 부여)",
+            "check": null
+          },
+          {
+            "name": "전원·셔터 확인",
+            "work": "전원을 켜고 셔터 개폐를 확인",
+            "input": "카메라 (제품번호 부여)",
+            "output": "카메라 (셔터 확인)",
+            "check": null
+          },
+          {
+            "name": "노출·필름 배출 확인",
+            "work": "시험 필름으로 노출과 필름 배출을 확인",
+            "input": "카메라 (셔터 확인)",
+            "output": "카메라 (노출·배출 확인)",
+            "check": null
+          },
+          {
+            "name": "외관 점검·최종 판정",
+            "work": "긁힘과 마감 상태를 보고 점검표를 작성한 뒤 최종 판정",
+            "input": "카메라 (노출·배출 확인)",
+            "output": "카메라 LO-I100",
+            "check": "최종 검사 점검표 확인"
+          }
+        ]
+      }
+    ],
+    "iqc": [
+      {
+        "part": "접점 단자",
+        "qty": 2000,
+        "check": "도금 변색·산화, 접점 접촉 저항, 핀 휨·변형",
+        "verdict": "합격"
+      },
+      {
+        "part": "O링",
+        "qty": 1000,
+        "check": "내경·선경, 갈라진 곳(크랙)·성형선, 경도",
+        "verdict": "합격"
+      },
+      {
+        "part": "그립",
+        "qty": 1000,
+        "check": "표면 끈적임·이염, 경도, 접착면 오염",
+        "verdict": "합격"
+      },
+      {
+        "part": "단자 덮개",
+        "qty": 1000,
+        "check": "찢김·성형 불량, 여닫을 때 복원과 걸림, 외형 치수",
+        "verdict": "합격"
+      },
+      {
+        "part": "패킹",
+        "qty": 1000,
+        "check": "찢김·기포·성형 찌꺼기(버), 단면 두께, 눌렀다 놓았을 때 복원",
+        "verdict": "합격"
+      },
+      {
+        "part": "나사",
+        "qty": 8000,
+        "check": "나사산 규격(M2 게이지 통과), 길이 5 mm, 머리 파손·녹",
+        "verdict": "합격"
+      },
+      {
+        "part": "와셔",
+        "qty": 8000,
+        "check": "내경·외경·두께, 가장자리 버, 녹 얼룩",
+        "verdict": "합격"
+      },
+      {
+        "part": "스트랩 고리",
+        "qty": 2000,
+        "check": "절단·접합부 마감, 잡아당길 때 벌어짐·변형, 표면 녹",
+        "verdict": "합격"
+      },
+      {
+        "part": "제품 라벨",
+        "qty": 1000,
+        "check": "인쇄 번짐, 모델명·문구 오탈자, 접착력",
+        "verdict": "합격"
+      },
+      {
+        "part": "로고 플레이트",
+        "qty": 1000,
+        "check": "로고 각인 선명도·색상, 표면 긁힘·산화, 접착면 상태",
+        "verdict": "합격"
+      },
+      {
+        "part": "스트랩",
+        "qty": 1000,
+        "check": "폭 20 mm·길이 1,000 mm, 재봉 풀림, 색상 균일",
+        "verdict": "합격"
+      }
+    ],
+    "inspections": [
+      {
+        "doc": "검사-06",
+        "item": "셔터 개폐",
+        "taskId": "공정-05",
+        "standard": "개폐 동작 정상",
+        "value": "986개 정상\n8개 미달",
+        "inspector": "채선우",
+        "verdict": "합격"
+      },
+      {
+        "doc": "검사-08",
+        "item": "필름 배출 구동·셔터 연동",
+        "taskId": "공정-08",
+        "standard": "전 기능 정상",
+        "value": "982개 정상\n4개 미달",
+        "inspector": "성하은",
+        "verdict": "합격"
+      },
+      {
+        "doc": "검사-10",
+        "item": "최종 검사",
+        "taskId": "공정-09",
+        "standard": "아래 제품번호별 점검표 전 항목 OK",
+        "value": "978대 기준 충족\n4대 미달",
+        "inspector": "노세아",
+        "verdict": "합격"
+      }
+    ],
+    "units": [
+      {
+        "serial": "LO-I100-166",
+        "checks": [
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-03",
+              "공정-07"
+            ],
+            "item": "외장 커버",
+            "standard": "긁힘·도장 벗겨짐 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "나사·와셔 체결",
+            "standard": "나사 8개·와셔 8개 빠짐·헛돔 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "제품 라벨·로고 플레이트",
+            "standard": "정위치 부착, 모델명 LO-I100 표기",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-06",
+              "공정-08"
+            ],
+            "item": "전원",
+            "standard": "전원이 켜지고 동작 표시가 정상일 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-08"
+            ],
+            "item": "셔터 개폐",
+            "standard": "셔터가 걸림 없이 열고 닫힐 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-09"
+            ],
+            "item": "노출",
+            "standard": "약 100mm급 내장 렌즈로 찍은 시험 필름의 노출이 적정할 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-08",
+              "공정-09"
+            ],
+            "item": "필름 배출",
+            "standard": "필름이 걸림 없이 배출될 것",
+            "result": "OK"
+          }
+        ]
+      },
+      {
+        "serial": "LO-I100-351",
+        "checks": [
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-03",
+              "공정-07"
+            ],
+            "item": "외장 커버",
+            "standard": "긁힘·도장 벗겨짐 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "나사·와셔 체결",
+            "standard": "나사 8개·와셔 8개 빠짐·헛돔 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "제품 라벨·로고 플레이트",
+            "standard": "정위치 부착, 모델명 LO-I100 표기",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-06",
+              "공정-08"
+            ],
+            "item": "전원",
+            "standard": "전원이 켜지고 동작 표시가 정상일 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-08"
+            ],
+            "item": "셔터 개폐",
+            "standard": "셔터가 걸림 없이 열고 닫힐 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-09"
+            ],
+            "item": "노출",
+            "standard": "약 100mm급 내장 렌즈로 찍은 시험 필름의 노출이 적정할 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-08",
+              "공정-09"
+            ],
+            "item": "필름 배출",
+            "standard": "필름이 걸림 없이 배출될 것",
+            "result": "OK"
+          }
+        ]
+      },
+      {
+        "serial": "LO-I100-377",
+        "checks": [
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-03",
+              "공정-07"
+            ],
+            "item": "외장 커버",
+            "standard": "긁힘·도장 벗겨짐 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "나사·와셔 체결",
+            "standard": "나사 8개·와셔 8개 빠짐·헛돔 없을 것",
+            "result": "OK"
+          },
+          {
+            "cls": "외관",
+            "taskIds": [
+              "공정-07"
+            ],
+            "item": "제품 라벨·로고 플레이트",
+            "standard": "정위치 부착, 모델명 LO-I100 표기",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-06",
+              "공정-08"
+            ],
+            "item": "전원",
+            "standard": "전원이 켜지고 동작 표시가 정상일 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-08"
+            ],
+            "item": "셔터 개폐",
+            "standard": "셔터가 걸림 없이 열고 닫힐 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-05",
+              "공정-09"
+            ],
+            "item": "노출",
+            "standard": "약 100mm급 내장 렌즈로 찍은 시험 필름의 노출이 적정할 것",
+            "result": "OK"
+          },
+          {
+            "cls": "기능",
+            "taskIds": [
+              "공정-08",
+              "공정-09"
+            ],
+            "item": "필름 배출",
+            "standard": "필름이 걸림 없이 배출될 것",
+            "result": "OK"
+          }
+        ]
+      }
+    ],
+    "handover": [
+      {
+        "item": "제품 설계 확정 (사양-01 버전 2.0, BOM-02 버전 1.0)",
+        "owner": "R&D부서 문가은 선임연구원",
+        "status": "완료"
+      },
+      {
+        "item": "작업 순서 초안 3종 (1차 모듈, 2차 모듈, 완제품 공정 각 1)",
+        "owner": "생산부서 배성민 선임",
+        "status": "완료"
+      },
+      {
+        "item": "첫 시제품 시험 5대 합격",
+        "owner": "R&D부서 류지성 광학팀장",
+        "status": "완료"
+      },
+      {
+        "item": "작업자 교육 (모듈 조립·검사 공정 전원 수료)",
+        "owner": "생산부서 최우석 생산팀장",
+        "status": "완료"
+      }
+    ]
+  }
+}
