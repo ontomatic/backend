@@ -15,4 +15,7 @@ def test_only_active_departments_are_listed(admin_client: TestClient, db_session
 
   # then
   assert response.status_code == 200
-  assert response.json() == [{'id': first.id, 'name': first.name}, {'id': last.id, 'name': last.name}]
+  assert response.json() == [
+    {'id': first.id, 'code': first.code, 'name': first.name},
+    {'id': last.id, 'code': last.code, 'name': last.name},
+  ]
