@@ -7,7 +7,7 @@ from backend.core.logger import get_logger
 from backend.db.session import get_session
 from backend.integrations.storage.s3 import get_storage
 from backend.models.file import FileStatus
-from backend.parsers.documents import get_parser
+from backend.parsers.documents.factory import create_parser
 from backend.parsers.documents.interface import ParsedDocument
 from backend.repositories.files import get_file_by_file_id
 from backend.services.auth import require_active_user
@@ -26,7 +26,7 @@ def parse_document(user_id: int, file_id: int) -> ParsedDocument:
       raise ValueError('File upload is not completed!')
 
     try:
-      parser = get_parser(Path(file.original_filename).suffix)
+      parser = create_parser(Path(file.original_filename).suffix)
 
       with io.BytesIO() as source:
         storage = get_storage(file.bucket)

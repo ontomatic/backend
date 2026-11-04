@@ -29,6 +29,7 @@ def api_settings() -> Generator[Settings, None, None]:
       'S3_ACCESS_KEY_ID': 'test',
       'S3_SECRET_ACCESS_KEY': 'test',
       'LANGFUSE_ENABLED': 'false',
+      'PARSER_PROVIDER': 'local',
     }.items():
       monkeypatch.setenv(name, value)
     get_settings.cache_clear()
