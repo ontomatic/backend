@@ -340,14 +340,6 @@ class Golden:
       cur[f] = v
     return cur
 
-  def merge(self, other):
-    for k, v in other.sc.items():
-      self.scalar(k, v)
-    for arr, items in other.x.items():
-      for it in items:
-        self.item(arr, **it)
-    self.src_extra.update(other.src_extra)
-
   def expected(self):
     out = {k: self.sc[k] for k in SCALARS if k in self.sc}
     for arr in FIELDS:
@@ -746,26 +738,8 @@ def build(json_path):
         )
     docs['QC_' + k] = g
 
-  # ---------- 모델 합본 ----------
-  model = Golden()
-  for k, _ in FLOW:
-    model.merge(docs[k])
-  # 사양서에만 있는 '해당 없음' 줄(F35·I100의 센서 칩 등)은 이 제품의 부품이 아니라 합본에서는 뺀다
-  bom_names = {b['part'] for b in J['bom']}
-  model.x['parts'] = [p for p in model.x['parts'] if p['name'] in bom_names]
-  # 부품이 속한 1차 모듈: 엑셀 '제품 구성'의 1차 모듈(m1) → 그 이름을 src 로 가진 품목.
-  # '— (직접 구성)'은 부속품이라 모듈 없음.
-  # 문서에서는 사양서 소제목·작업 순서의 투입 목록으로 이어 알 수 있다
-  for b in J['bom']:
-    direct = b['m1'].startswith('—')
-    it = (
-      None
-      if direct
-      else next(i for i in ITEMS if i['stage'] == 'M1' and (b['m1'] == i['src'] or b['m1'] in i['src'].split('·')))
-    )  # I100 '렌즈·셔터부'는 이름 그대로
-    model.item('parts', name=b['part'], module=it['name'] if it else None, accessory=direct)
   files = {k: f'{i:02d}_{TITLE[k]}.docx' for i, (k, _) in enumerate(FLOW, 1)}
-  return MODEL, [(files[k], docs[k]) for k, _ in FLOW], model, J
+  return MODEL, [(files[k], docs[k]) for k, _ in FLOW], J
 
 
 NOTE_DOC = (
@@ -775,16 +749,6 @@ NOTE_DOC = (
   '에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 '
   '적었다(채점하지 않음). 사람 검수 후 status 를 reviewed '
   '로 바꾼다.'
-)
-NOTE_MODEL = (
-  '생성기 입력({json}, cgs_models.json)에서 make_g'
-  'olden.py 가 만든 모델 합본 초안 ({today}). 문서 {n}'
-  '개의 문서별 정답을 합치고(같은 항목 값이 문서마다 같은지 확인), 부품'
-  "의 모듈·부속품 여부(엑셀 '제품 구성' 시트, 문서에서는 사양서 소제목"
-  '·작업 순서 투입 목록으로 이어 알 수 있음)를 더했다. 사양서에만 있는'
-  " '해당 없음' 부품 줄은 이 제품의 부품이 아니라 뺐다. 표지가 없는 "
-  '파일이라 documents[].dept 는 없고, people[].rol'
-  'e 은 조직표가 들어 있는 BOM 및 양산 이관 문서의 사람에만 있다.'
 )
 EXTRA_NOTES = {
   (
@@ -857,7 +821,7 @@ def main():
   force = '--force' in sys.argv
   for jp in args or ['d100.json', 't400.json', 'f35.json', 'i100.json', 'd200.json']:
     jpath = jp if os.path.isabs(jp) else os.path.join(HERE, jp)
-    MODEL, docs, model, J = build(jpath)
+    MODEL, docs, _ = build(jpath)
     folder = model_folder(MODEL)
     have = sorted(unicodedata.normalize('NFC', f) for f in os.listdir(folder) if f.endswith('.docx'))
     want = [f for f, _ in docs]
@@ -889,32 +853,7 @@ def main():
         ),
         force,
       )
-    write(
-      os.path.join(folder, f'{MODEL}.golden.json'),
-      dict(
-        file=want,
-        model=MODEL,
-        scope='model',
-        status='draft',
-        reviewed_by=None,
-        notes=NOTE_MODEL.format(json=jname, today=TODAY, n=len(docs))
-        + ' '
-        + EXTRA_NOTES['생산계획서'].format(model=MODEL),
-        match=MATCH,
-        absent=model.absent(),
-        src=model.src(),
-        expected=model.expected(),
-      ),
-      force,
-    )
-    e = model.expected()
-    print(
-      f'{MODEL}: 문서 {len(docs)}개 + 합본 1개 → {folder}  '
-      f'(부품 {len(e[("parts")])}, 공정 {len(e[("tasks")])}, 모듈 {len(e[("modules")])}, 수입검사 {
-        len(e[("iqc")])
-      }, 검사 {len(e[("inspections")])}, '
-      f'점검표 {len(e["units"])}, 사람 {len(e["people"])}, 문서 {len(e["documents"])})'
-    )
+    print(f'{MODEL}: 문서별 정답 {len(docs)}개 → {folder}')
 
 
 if __name__ == '__main__':

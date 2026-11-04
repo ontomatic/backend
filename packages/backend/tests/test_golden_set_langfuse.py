@@ -73,15 +73,14 @@ def langfuse(monkeypatch: pytest.MonkeyPatch, api_settings: Settings) -> Iterato
     get_settings.cache_clear()
 
 
-def test_eval_tracks_document_and_combined_answers(tmp_path: Path, langfuse: RecordingLangfuse) -> None:
+def test_eval_tracks_document_answers(tmp_path: Path, langfuse: RecordingLangfuse) -> None:
   # Given real golden documents, when tracing the CLI, then every answer and score reaches Langfuse.
   code = evaluation.main([str(DATA / 'LO-D100'), '--langfuse', '--output', str(tmp_path / 'report.json')])
   assert code == 0
   assert len(langfuse.runs) == 1
   results = langfuse.runs[0].item_results
-  assert len(results) == 11
-  assert sum(r.item['metadata']['scope'] == 'document' for r in results) == 10
-  assert sum(r.item['metadata']['scope'] == 'model' for r in results) == 1
+  assert len(results) == 10
+  assert all(r.item['metadata']['scope'] == 'document' for r in results)
   for result in results:
     assert result.item['expected_output']
     assert result.item['input']['blocks']
@@ -91,8 +90,6 @@ def test_eval_tracks_document_and_combined_answers(tmp_path: Path, langfuse: Rec
     assert scores['accuracy'] == 1
     assert scores['wrong'] == scores['missing'] == scores['extras'] == 0
   assert langfuse.closed
-  combined = next(r for r in results if r.item['metadata']['scope'] == 'model')
-  assert combined.output['actual']['model'] == 'LO-D100'
 
 
 def test_traced_scoring_failure_still_fails_the_cli(tmp_path: Path, langfuse: RecordingLangfuse) -> None:
@@ -216,7 +213,7 @@ def test_llm_answers_and_model_metadata_are_traced(
   assert (
     evaluation.main([str(tmp_path), '--extractor', 'llm', '--langfuse', '--output', str(tmp_path / 'report.json')]) == 1
   )
-  assert len(model.calls) == 2
+  assert len(model.calls) == 1
   run = langfuse.runs[0]
   assert run.name == f'golden-set-llm/{tmp_path.name}'
   for result in run.item_results:
@@ -264,12 +261,11 @@ def test_llm_progress_is_visible_while_running_and_when_finished(
     assert evaluation.main(args) == 1
   observed.append(capsys.readouterr().err)
   prefix = f'[golden-set-llm/{tmp_path.name}]'
-  assert f'{prefix} [1/2] 시작: sample.docx' in observed[0]
+  assert f'{prefix} [1/1] 시작: sample.docx' in observed[0]
   if fails:
-    assert f'{prefix} [1/2] 실패: sample.docx' in observed[-1]
+    assert f'{prefix} [1/1] 실패: sample.docx' in observed[-1]
     assert '완료:' not in observed[-1]
     assert not report.exists()
   else:
-    assert f'{prefix} [1/2] 완료: sample.docx' in observed[1]
-    assert f'{prefix} [2/2] 시작: TEST 합본' in observed[1]
-    assert f'{prefix} [2/2] 완료: TEST 합본' in observed[2]
+    assert f'{prefix} [1/1] 완료: sample.docx' in observed[1]
+  assert len(observed) == 2

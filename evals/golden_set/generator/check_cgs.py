@@ -1,4 +1,4 @@
-"""문서 사이 연결 검사. 사용: python check_cgs.py 문서.docx 데이터.json"""
+"""문서 사이 연결 검사. 사용: python check_cgs.py 문서폴더 데이터.json"""
 
 import datetime
 import json
@@ -12,7 +12,6 @@ from docx.table import Table
 from docx.text.paragraph import Paragraph
 
 sys.stdout.reconfigure(encoding='utf-8')
-d = docx.Document(sys.argv[1])
 CFG = json.loads(Path(__file__).with_name('cgs_models.json').read_text(encoding='utf-8'))
 # 포장·수입검사는 공정번호에서 제외하고 남은 생산 공정을 순서대로 매긴다.
 _raw = Path(sys.argv[2]).read_text(encoding='utf-8')
@@ -38,17 +37,22 @@ for t in J['tasks']:
   t['name'] = re.sub(r'(광학|경통|센서|셔터|화면|전원|외장)부 조립', r'\1 조립', t['name'])
 CODE = J['model'].split('-')[1]
 MODEL = J['model']  # 모델명은 회사 자료 그대로
-docs, cur = {}, '표지'
-for el in d.element.body.iterchildren():
-  tag = el.tag.split('}')[1]
-  if tag == 'p':
-    p = Paragraph(el, d)
-    if p.style.name.startswith('Heading 1'):
-      cur = p.text.strip()
-    docs.setdefault(cur, []).append(('p', p.text.strip()))
-  elif tag == 'tbl':
-    t = Table(el, d)
-    docs.setdefault(cur, []).append(('t', [[c.text.strip() for c in r.cells] for r in t.rows]))
+docs = {}
+for file in sorted(Path(sys.argv[1]).glob('*.docx')):
+  d = docx.Document(file)
+  cur = next((p.text.strip() for p in d.paragraphs if p.style.name.startswith('Heading 1')), None)
+  if not cur or cur in docs:
+    raise ValueError(f'문서 제목이 없거나 중복됨: {file}')
+  for el in d.element.body.iterchildren():
+    tag = el.tag.split('}')[1]
+    if tag == 'p':
+      p = Paragraph(el, d)
+      if p.style.name.startswith('Heading 1'):
+        cur = p.text.strip()
+      docs.setdefault(cur, []).append(('p', p.text.strip()))
+    elif tag == 'tbl':
+      t = Table(el, d)
+      docs.setdefault(cur, []).append(('t', [[c.text.strip() for c in r.cells] for r in t.rows]))
 
 res = []
 
@@ -134,7 +138,7 @@ RT = {
 STEPS = {
   f'공정-{n}': rows for n, rows in MC.get('steps', {}).items()
 }  # 렌즈·본체·완제품 공정은 한 공정번호 안을 단계로 나눈다
-# 문서번호: 종류-순번, 숫자는 문서 흐름 순서(표지의 순서)와 같다
+# 문서번호: 종류-순번, 숫자는 문서 흐름 순서와 같다
 _flow = [
   ('사양', '사양'),
   ('부품표', 'BOM'),
@@ -151,7 +155,6 @@ QC = {'M1': '검사성적서 (1차 모듈)', 'M2': '검사성적서 (2차 모듈
 LEADER = CFG['leaders']
 ALL = [SPEC, BOM, IQC, WO] + RT_DOCS + list(QC.values())
 ORDER = [
-  '표지',
   SPEC,
   BOM,
   IQC,
@@ -171,7 +174,7 @@ ok(
   ' > '.join(docs),
 )
 no_prob = []
-for doc, want in zip(ORDER[1:], NOLIST, strict=False):
+for doc, want in zip(ORDER, NOLIST, strict=False):
   got = meta(doc).get('문서번호') if doc in docs else None
   if got != want:
     no_prob.append(f'{doc}: {got} ≠ {want}')
@@ -301,8 +304,8 @@ ok(
 )
 last = max(s['end'] for s in doc_sched.values())
 ok(
-  f'마지막 작업({T[FIN]["name"]}, {FIN}) 종료일 = 완성일이고, 표지·완제품 검사성적서의 완성일과 같음',
-  doc_sched[FIN]['end'] == last and str(last) in ' '.join(paras('표지')) and str(last) in ' '.join(paras(QC['F'])),
+  f'마지막 작업({T[FIN]["name"]}, {FIN}) 종료일 = 완제품 검사성적서의 검사일',
+  doc_sched[FIN]['end'] == last and day(meta(QC['F'])['검사일']) == last,
   str(last),
 )
 
@@ -708,14 +711,14 @@ ok(
 # 13. 결재란: 문서마다 담당·검토·승인에 이름·직책·날짜, 결재일 = 문서 날짜, 그 문서를 쓰기 전에 결재
 aps = [t for t in (x[1] for v in docs.values() for x in v if x[0] == 't') if t and t[0] == ['담당', '검토', '승인']]
 ap_prob = []
-if len(aps) != len(ORDER) - 1:
-  ap_prob.append(f'결재란 {len(aps)}개 (기대 {len(ORDER) - 1})')
+if len(aps) != len(ORDER):
+  ap_prob.append(f'결재란 {len(aps)}개 (기대 {len(ORDER)})')
 first_use = min(
   day(t['start'])
   for t in T.values()
   if any(x.startswith('제외-') and T_ALL[x]['name'].startswith('구매 부품 입고') for x in t['pre_all'])
 )  # 구매 부품을 처음 쓰는 날
-for doc, t in zip(ORDER[1:], aps, strict=False):
+for doc, t in zip(ORDER, aps, strict=False):
   cells = t[1]
   if any(len([y for y in c.split('\n') if y.strip()]) != 3 for c in cells):
     ap_prob.append(f'{doc} 결재란에 이름·직책·날짜가 다 없음')
@@ -739,7 +742,7 @@ for doc, t in zip(ORDER[1:], aps, strict=False):
 # 결재 전에 시작하는 공정이 있으면 그 사실을 작성 근거에 적었는지 본다
 all_text = ' '.join(x for v in docs.values() for k_, x in v if k_ == 'p')
 for c, nxt in (('M1', [i for k in M2KEYS for i in IT[k]['tids']]), ('M2', IT['F']['tids'])):
-  t = aps[ORDER.index(QC[c]) - 1] if len(aps) == len(ORDER) - 1 else None
+  t = aps[ORDER.index(QC[c])] if len(aps) == len(ORDER) else None
   if not t:
     continue
   d_ap = day(t[1][0])

@@ -1,4 +1,4 @@
-"""Generate a new Word bundle with Python; existing output is never overwritten."""
+"""Generate individual Word documents in a new directory; existing output is never overwritten."""
 
 import argparse
 import os
@@ -285,45 +285,28 @@ def render(document: WordDocument, expected: dict, source: dict, config: dict, i
     table(document, ['', '', ''], [['종합 판정', '☑ 합격      ☐ 불합격', basis]], header=False)
 
 
-def generate(output: Path, source_file: Path, *, split: bool = False) -> None:
+def generate(output: Path, source_file: Path) -> None:
   if output.exists():
     raise FileExistsError(f'기존 출력은 덮어쓰지 않습니다: {output}')
-  model, goldens, _, source = build(str(source_file))
+  model, goldens, source = build(str(source_file))
   config = CFG['models'][model]
   image = source_file.with_name(f'{model.split("-")[1].lower()}_image.jpg')
   output.parent.mkdir(parents=True, exist_ok=True)
   with tempfile.TemporaryDirectory(prefix='.camera-docs-', dir=output.parent) as temporary:
     stage = Path(temporary)
-    combined = new_document()
-    combined.add_paragraph(f'온토메틱 {model} 문서 {len(goldens)}종')
-    combined.add_paragraph(f'완성일 {max(t["end"] for t in source["tasks"])}')
-    organization(combined, model, config)
     for name, golden in goldens:
-      document = new_document() if split else combined
-      if not split:
-        document.add_page_break()
+      document = new_document()
       render(document, golden.expected(), source, config, image)
-      if split:
-        document.save(str(stage / name))
-    if not split:
-      combined.add_paragraph('부록 작성 근거')
-      combined.add_paragraph(
-        '자료는 모델 입력 JSON과 cgs_models.json을 따릅니다. 가상 값과 설계 값은 골든 src에 구분됩니다.'
-      )
-      combined.save(str(stage / output.name))
-    if split:
-      os.rename(stage, output)
-    else:
-      os.link(stage / output.name, output)
+      document.save(str(stage / name))
+    os.rename(stage, output)
 
 
 def main() -> None:
   parser = argparse.ArgumentParser(description=__doc__)
   parser.add_argument('output', type=Path)
   parser.add_argument('source', type=Path)
-  parser.add_argument('--split', action='store_true')
   args = parser.parse_args()
-  generate(args.output, args.source, split=args.split)
+  generate(args.output, args.source)
   print(f'생성 완료: {args.output}')
 
 

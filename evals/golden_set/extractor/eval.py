@@ -84,7 +84,7 @@ def summarize(rows: list[dict], extras: list[dict]) -> dict:
 
 async def extraction_task(*, item: dict, llm: LLM | None = None, **kwargs: Any) -> dict:
   metadata = item['metadata']
-  name = f'{metadata["model"]} 합본' if metadata['scope'] == 'model' else item['input']['files'][0]
+  name = item['input']['files'][0]
   actual = await extract_llm(llm, item['input']['blocks']) if llm is not None else extract(item['input']['blocks'])
   compared = compare(name, dict(expected=item['expected_output'], **metadata), actual)
   return dict(actual=actual, **compared)
@@ -99,8 +99,8 @@ def evaluate(folder: Path, *, client: Langfuse | None = None, extractor: Literal
   goldens = sorted(folder.glob('*.golden.json'))
   if not goldens:
     raise ValueError(f'{folder}: 정답 파일이 없음')
-  result = {'document': dict(rows=[], extras=[]), 'model': dict(rows=[], extras=[])}
-  blocks, combined, items = {}, [], []
+  result = {'document': dict(rows=[], extras=[])}
+  names, items = set(), []
   statuses = Counter()
   metadata = {'extractor': extractor}
   llm = None
@@ -109,41 +109,27 @@ def evaluate(folder: Path, *, client: Langfuse | None = None, extractor: Literal
     metadata.update(llm_provider=settings.llm_provider, llm_model=settings.llm_model)
     llm = create_llm(output_schema=OUTPUT_SCHEMA)
 
-  def add_item(golden: dict, names: list[str]) -> None:
+  for file in goldens:
+    golden = json.loads(file.read_text(encoding='utf-8'))
+    statuses[golden['status']] += 1
+    if golden['scope'] != 'document':
+      raise ValueError(f'{file}: 알 수 없는 평가 범위')
+    name = golden['file']
+    if name in names:
+      raise ValueError(f'{folder}: 문서별 정답 중복: {name}')
+    names.add(name)
     items.append(
       dict(
-        input=dict(files=names, blocks=[block for name in names for block in blocks[name]]),
+        input=dict(files=[name], blocks=parse_docx(resolve_file(folder, name))),
         expected_output=golden['expected'],
         metadata={**metadata, **{key: golden[key] for key in ('model', 'scope', 'status', 'match', 'src')}},
       )
     )
-
-  for file in goldens:
-    golden = json.loads(file.read_text(encoding='utf-8'))
-    statuses[golden['status']] += 1
-    if golden['scope'] == 'model':
-      combined.append(golden)
-      continue
-    if golden['scope'] != 'document':
-      raise ValueError(f'{file}: 알 수 없는 평가 범위')
-    name = golden['file']
-    if name in blocks:
-      raise ValueError(f'{folder}: 문서별 정답 중복: {name}')
-    blocks[name] = parse_docx(resolve_file(folder, name))
-    add_item(golden, [name])
-  if len(combined) > 1:
-    raise ValueError(f'{folder}: 모델 합본 정답 중복')
-  for golden in combined:
-    if not golden['file'] or not isinstance(golden['file'], list):
-      raise ValueError(f'{folder}: 합본 문서 목록이 없음')
-    if len(golden['file']) != len(set(golden['file'])) or set(golden['file']) != set(blocks):
-      raise ValueError(f'{folder}: 합본 목록과 문서별 정답 목록이 다름')
-    add_item(golden, golden['file'])
   name = f'golden-set-extraction/{folder.name}' if extractor == 'rules' else f'golden-set-llm/{folder.name}'
   outputs = run_items(name, items, partial(extraction_task, llm=llm), extraction_scores, client)
-  for item, output in zip(items, outputs, strict=True):
+  for output in outputs:
     for key in ('rows', 'extras'):
-      result[item['metadata']['scope']][key].extend(output[key])
+      result['document'][key].extend(output[key])
   if not result['document']['rows']:
     raise ValueError(f'{folder}: 채점한 문서의 칸이 없음')
   result['statuses'] = dict(statuses)
@@ -161,7 +147,7 @@ def print_summary(label: str, rows: list[dict], extras: list[dict]) -> None:
 
 
 def main(args: list[str] | None = None) -> int:
-  parser = argparse.ArgumentParser(description='골든셋 문서별·모델 합본 추출 평가 (데이터는 읽기 전용)')
+  parser = argparse.ArgumentParser(description='골든셋 문서별 추출 평가 (데이터는 읽기 전용)')
   parser.add_argument('folders', nargs='*', type=Path)
   parser.add_argument('--detail', action='store_true')
   parser.add_argument('--output', type=Path)
@@ -175,7 +161,7 @@ def main(args: list[str] | None = None) -> int:
   if not models:
     raise ValueError('평가할 모델 폴더가 없음')
   report = {}
-  totals = {scope: dict(rows=[], extras=[]) for scope in ('document', 'model')}
+  totals = {'document': dict(rows=[], extras=[])}
   with tracking(options.langfuse) as client:
     for folder in models:
       result = evaluate(folder, client=client, extractor=options.extractor)

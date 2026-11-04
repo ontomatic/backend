@@ -1,6 +1,4 @@
-import json
 from copy import deepcopy
-from pathlib import Path
 
 import pytest
 from backend.exceptions.workflow import WorkflowError
@@ -61,20 +59,32 @@ def test_invalid_bom_is_rejected(failure: str) -> None:
     validate_graph(data)
 
 
-def test_original_v01_baseline_and_selective_revision_keep_correct_totals() -> None:
-  fixture = Path(__file__).parents[1] / 'fixtures' / 'v01'
-  baseline = json.loads((fixture / 'baseline_graph.json').read_text())
-  revision = json.loads((fixture / 'revision_graph.json').read_text())
-  assert len(baseline['items']) == 10
-  assert sum(len(item['attributes']) for item in baseline['items']) == 30
-  assert len(baseline['relations']) == 10
+def test_selective_revision_keeps_material_versions_and_quantities_separate() -> None:
+  # Given a shared screw, when only the lens branch changes version, then old and new quantities stay separate.
+  baseline = graph()
+  revision = {
+    'root': 'CAM@2',
+    'items': [
+      baseline['items'][0] | {'key': 'CAM@2', 'version': 2},
+      baseline['items'][1] | {'key': 'LENS@2', 'version': 2},
+      baseline['items'][2],
+      baseline['items'][3],
+      baseline['items'][3] | {'key': 'SCREW@2', 'version': 2},
+    ],
+    'relations': [
+      baseline['relations'][0] | {'parent': 'CAM@2', 'child': 'LENS@2'},
+      baseline['relations'][1] | {'parent': 'CAM@2'},
+      baseline['relations'][2] | {'parent': 'LENS@2', 'child': 'SCREW@2', 'condition': 'J10'},
+      baseline['relations'][3],
+    ],
+  }
+
   first = build_targets(baseline, 1)
   second = build_targets(revision, 1)
-  assert sum(t['quantity'] for t in first.values() if t['code'] == 'MAT-SCR-001') == 10
-  assert sum(t['quantity'] for t in second.values() if t['code'] == 'MAT-SCR-001' and t['version'] == 1) == 6
-  assert sum(t['quantity'] for t in second.values() if t['code'] == 'MAT-SCR-001' and t['version'] == 2) == 4
-  assert len(revision['items']) == 11
-  assert len({item['key'] for item in baseline['items'] + revision['items']}) == 13
+
+  assert sum(t['quantity'] for t in first.values() if t['code'] == 'SCREW') == 10
+  assert sum(t['quantity'] for t in second.values() if t['code'] == 'SCREW' and t['version'] == 1) == 6
+  assert sum(t['quantity'] for t in second.values() if t['code'] == 'SCREW' and t['version'] == 2) == 4
 
 
 def test_input_lengths_match_persisted_columns() -> None:

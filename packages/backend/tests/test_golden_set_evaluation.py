@@ -107,7 +107,7 @@ def test_cli_report_paths_preserve_previous_runs(
   monkeypatch.setattr(
     evaluation,
     'evaluate',
-    lambda *args, **kwargs: {scope: dict(rows=[], extras=[]) for scope in ('document', 'model')},
+    lambda *args, **kwargs: {'document': dict(rows=[], extras=[])},
   )
   args = [str(tmp_path), '--extractor', extractor]
   if explicit_output:
@@ -129,16 +129,17 @@ def test_cli_report_paths_preserve_previous_runs(
         assert str(tmp_path) in json.loads(report.read_text())['models']
 
 
-@pytest.mark.parametrize('model', ['LO-D100', 'LO-F35', 'LO-I100', 'LO-T400'])
+@pytest.mark.parametrize('model', ['LO-D100', 'LO-F35', 'LO-I100', 'LO-T400', 'LO-D200'])
 def test_original_documents_and_wrong_cases_are_preserved_and_pass(model: str) -> None:
   # Given the saved fixtures, when both evaluations run, then all answers match without data writes.
   folder = DATA / model
   before = hashes(folder)
   result = evaluate(folder)
-  for scope in ('document', 'model'):
-    stats = summarize(**result[scope])
-    assert stats['fields'] > 0 and stats['accuracy'] == 1
-    assert stats['extras'] == 0
+  assert 'model' not in result
+  assert all(json.loads(file.read_text())['scope'] == 'document' for file in folder.glob('*.golden.json'))
+  stats = summarize(**result['document'])
+  assert stats['fields'] > 0 and stats['accuracy'] == 1
+  assert stats['extras'] == 0
   wrong = check_model(folder, DATA / 'wrong_set' / model)
   assert wrong['baseline'] == []
   assert wrong['uncovered'] == []
@@ -170,16 +171,39 @@ def test_validator_detects_cycles_and_invalid_calendar_dates() -> None:
   assert any(i['rule'] == 'R05' for i in issues)
 
 
+@pytest.mark.parametrize('state', ['complete', 'empty', 'duplicate'])
+def test_document_folder_validation(tmp_path: Path, state: str) -> None:
+  # Given individual documents, when checking their folder, then only a complete set with unique titles passes.
+  folder = DATA / 'LO-D100' if state == 'complete' else tmp_path
+  if state == 'duplicate':
+    source = resolve_file(DATA / 'LO-D100', '01_제품사양서.docx')
+    for name in ('01.docx', '02.docx'):
+      shutil.copyfile(source, folder / name)
+
+  result = run_cli('evals.golden_set.generator.check_cgs', folder, DATA.parent / 'generator' / 'd100.json')
+
+  assert result.returncode == (0 if state == 'complete' else 1)
+  if state == 'complete':
+    assert '통과 27 / 전체 27' in result.stdout
+  elif state == 'empty':
+    assert '없음:' in result.stdout
+  else:
+    assert '문서 제목이 없거나 중복됨' in result.stderr
+
+
 @pytest.mark.parametrize(
-  'model,source', [('LO-D100', 'd100'), ('LO-T400', 't400'), ('LO-F35', 'f35'), ('LO-I100', 'i100')]
+  'model,source',
+  [('LO-D100', 'd100'), ('LO-T400', 't400'), ('LO-F35', 'f35'), ('LO-I100', 'i100'), ('LO-D200', 'd200')],
 )
 def test_python_document_generation_matches_existing_answers(tmp_path: Path, model: str, source: str) -> None:
   # Given the same model inputs, when Python generates documents, then existing answers still match.
   folder = tmp_path / model
-  generate(folder, DATA.parent / 'generator' / f'{source}.json', split=True)
+  generate(folder, DATA.parent / 'generator' / f'{source}.json')
+  assert len(list(folder.glob('*.docx'))) == 10
   for golden in (DATA / model).glob('*.golden.json'):
     shutil.copyfile(golden, folder / golden.name)
   result = evaluate(folder)
-  assert all(summarize(**result[scope])['accuracy'] == 1 for scope in ('document', 'model'))
+  assert summarize(**result['document'])['accuracy'] == 1
+  assert 'model' not in result
   with pytest.raises(FileExistsError):
-    generate(folder, DATA.parent / 'generator' / f'{source}.json', split=True)
+    generate(folder, DATA.parent / 'generator' / f'{source}.json')
