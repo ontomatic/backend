@@ -1,0 +1,421 @@
+{
+  "file": "02_BOM 및 양산 이관.docx",
+  "model": "LO-I100",
+  "scope": "document",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "생성기 입력(i100.json, cgs_models.json)에서 build_cgs.js 와 같은 규칙으로 make_golden.py 가 만든 초안 (2026-11-03). 추출기 출력과 독립. 이 문서(표지·부록 없는 파일)에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 적었다(채점하지 않음). 사람 검수 후 status 를 reviewed 로 바꾼다.",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "productName",
+    "specVersion",
+    "plannedQty",
+    "completedQty",
+    "documents[].dept",
+    "parts[].module",
+    "parts[].accessory",
+    "parts[].detail",
+    "parts[].attrs"
+  ],
+  "src": {
+    "model": "자료",
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.버전": "설계",
+    "documents[].meta.발행일": "가상",
+    "documents[].meta.상위 모델": "자료",
+    "people[].name": "가상",
+    "people[].dept": "가상",
+    "people[].title": "가상",
+    "people[].role": "가상",
+    "parts[].seq": "설계",
+    "parts[].code": "설계",
+    "parts[].name": "자료",
+    "parts[].spec": "자료",
+    "parts[].qtyPerUnit": "가상",
+    "parts[].sourcing": "자료",
+    "parts[].supplier": "가상",
+    "parts[].taskId": "설계",
+    "handover[].item": "설계",
+    "handover[].owner": "가상",
+    "handover[].status": "가상"
+  },
+  "expected": {
+    "model": "LO-I100",
+    "documents": [
+      {
+        "no": "BOM-02",
+        "title": "BOM 및 양산 이관",
+        "kind": "bom",
+        "version": "1.0",
+        "date": "2026-11-17",
+        "meta": {
+          "문서번호": "BOM-02",
+          "버전": "1.0",
+          "발행일": "2026-11-17",
+          "상위 모델": "LO-I100"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "문가은",
+            "title": "선임연구원",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "검토",
+            "name": "류지성",
+            "title": "광학팀장",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "승인",
+            "name": "서현우",
+            "title": "부서장",
+            "date": "2026-11-17"
+          }
+        ],
+        "basedOn": null,
+        "verdict": null
+      }
+    ],
+    "people": [
+      {
+        "name": "문가은",
+        "dept": "R&D부서",
+        "title": "선임연구원",
+        "role": "제품사양서·BOM 작성, 제품 설계"
+      },
+      {
+        "name": "류지성",
+        "dept": "R&D부서",
+        "title": "광학팀장",
+        "role": "BOM 검토, 첫 시제품 시험"
+      },
+      {
+        "name": "서현우",
+        "dept": "R&D부서",
+        "title": "부서장",
+        "role": "제품사양서 검토, BOM 승인, 양산 이관 서명"
+      },
+      {
+        "name": "배성민",
+        "dept": "생산부서",
+        "title": "선임",
+        "role": "작업 순서 문서 작성 (생산기술)"
+      },
+      {
+        "name": "최우석",
+        "dept": "생산부서",
+        "title": "생산팀장",
+        "role": "생산계획서·작업 순서 검토, 작업자 교육"
+      },
+      {
+        "name": "권상혁",
+        "dept": "생산부서",
+        "title": "부서장",
+        "role": "생산계획서·작업 순서 승인, 양산 이관 서명"
+      },
+      {
+        "name": "오세영",
+        "dept": "품질부서",
+        "title": "부서장",
+        "role": "수입검사·검사성적서 승인, 양산 이관 서명"
+      },
+      {
+        "name": "정태호",
+        "dept": "경영",
+        "title": "대표이사",
+        "role": "제품사양서 승인"
+      },
+      {
+        "name": "홍지원",
+        "dept": "생산부서",
+        "title": "대리",
+        "role": "생산계획서 작성 (생산관리)"
+      },
+      {
+        "name": "차민서",
+        "dept": "품질부서",
+        "title": "품질팀장",
+        "role": "수입검사·검사성적서 검토"
+      },
+      {
+        "name": "조은서",
+        "dept": "품질부서",
+        "title": "주임",
+        "role": "수입검사성적서 작성, 구매 부품 검사"
+      },
+      {
+        "name": "한예준",
+        "dept": "품질부서",
+        "title": "주임",
+        "role": "검사성적서 (1차 모듈·2차 모듈·완제품) 작성"
+      },
+      {
+        "name": "이서준",
+        "dept": "생산부서",
+        "title": "파트장",
+        "role": "1차 모듈 공정 책임"
+      },
+      {
+        "name": "김민준",
+        "dept": "생산부서",
+        "title": "파트장",
+        "role": "2차 모듈 공정 책임"
+      },
+      {
+        "name": "박도윤",
+        "dept": "생산부서",
+        "title": "파트장",
+        "role": "완제품 공정 책임"
+      }
+    ],
+    "parts": [
+      {
+        "seq": 1,
+        "code": "부품-01",
+        "name": "렌즈",
+        "spec": "광학용 폴리카보네이트·PMMA",
+        "qtyPerUnit": 3,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-01"
+      },
+      {
+        "seq": 2,
+        "code": "부품-02",
+        "name": "경통",
+        "spec": "PC/ABS",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-03"
+      },
+      {
+        "seq": 3,
+        "code": "부품-03",
+        "name": "셔터막",
+        "spec": "흑색 코팅 스테인리스강 박판",
+        "qtyPerUnit": 2,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-02"
+      },
+      {
+        "seq": 4,
+        "code": "부품-04",
+        "name": "셔터 프레임",
+        "spec": "유리섬유 강화 PBT",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-02"
+      },
+      {
+        "seq": 5,
+        "code": "부품-05",
+        "name": "배터리 케이스",
+        "spec": "ABS",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-04"
+      },
+      {
+        "seq": 6,
+        "code": "부품-06",
+        "name": "접점 단자",
+        "spec": "구리 합금",
+        "qtyPerUnit": 2,
+        "sourcing": "구매",
+        "supplier": "㈜한국전자부품",
+        "taskId": null
+      },
+      {
+        "seq": 7,
+        "code": "부품-07",
+        "name": "O링",
+        "spec": "NBR 고무",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국고무",
+        "taskId": null
+      },
+      {
+        "seq": 8,
+        "code": "부품-08",
+        "name": "외장 커버",
+        "spec": "PC/ABS",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-03"
+      },
+      {
+        "seq": 9,
+        "code": "부품-09",
+        "name": "그립",
+        "spec": "실리콘 고무",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국고무",
+        "taskId": null
+      },
+      {
+        "seq": 10,
+        "code": "부품-10",
+        "name": "단자 덮개",
+        "spec": "실리콘 고무",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국고무",
+        "taskId": null
+      },
+      {
+        "seq": 11,
+        "code": "부품-11",
+        "name": "패킹",
+        "spec": "실리콘 고무",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국고무",
+        "taskId": null
+      },
+      {
+        "seq": 12,
+        "code": "부품-12",
+        "name": "나사",
+        "spec": "스테인리스강, 규격 M2 × 5 mm",
+        "qtyPerUnit": 8,
+        "sourcing": "구매",
+        "supplier": "㈜한국패스너",
+        "taskId": null
+      },
+      {
+        "seq": 13,
+        "code": "부품-13",
+        "name": "와셔",
+        "spec": "스테인리스강",
+        "qtyPerUnit": 8,
+        "sourcing": "구매",
+        "supplier": "㈜한국패스너",
+        "taskId": null
+      },
+      {
+        "seq": 14,
+        "code": "부품-14",
+        "name": "스트랩 고리",
+        "spec": "스테인리스강",
+        "qtyPerUnit": 2,
+        "sourcing": "구매",
+        "supplier": "㈜한국패스너",
+        "taskId": null
+      },
+      {
+        "seq": 15,
+        "code": "부품-15",
+        "name": "제품 라벨",
+        "spec": "PET",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국인쇄",
+        "taskId": null
+      },
+      {
+        "seq": 16,
+        "code": "부품-16",
+        "name": "로고 플레이트",
+        "spec": "알루미늄",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국인쇄",
+        "taskId": null
+      },
+      {
+        "seq": 17,
+        "code": "부품-17",
+        "name": "렌즈 캡",
+        "spec": "ABS, 직경 58 mm",
+        "qtyPerUnit": 1,
+        "sourcing": "자체 가공",
+        "supplier": null,
+        "taskId": "공정-04"
+      },
+      {
+        "seq": 18,
+        "code": "부품-18",
+        "name": "스트랩",
+        "spec": "나일론, 폭·길이 20 × 1,000 mm",
+        "qtyPerUnit": 1,
+        "sourcing": "구매",
+        "supplier": "㈜한국섬유",
+        "taskId": null
+      }
+    ],
+    "modules": [],
+    "tasks": [],
+    "iqc": [],
+    "inspections": [],
+    "units": [],
+    "handover": [
+      {
+        "item": "제품 설계 확정 (사양-01 버전 2.0, BOM-02 버전 1.0)",
+        "owner": "R&D부서 문가은 선임연구원",
+        "status": "완료"
+      },
+      {
+        "item": "작업 순서 초안 3종 (1차 모듈, 2차 모듈, 완제품 공정 각 1)",
+        "owner": "생산부서 배성민 선임",
+        "status": "완료"
+      },
+      {
+        "item": "첫 시제품 시험 5대 합격",
+        "owner": "R&D부서 류지성 광학팀장",
+        "status": "완료"
+      },
+      {
+        "item": "작업자 교육 (모듈 조립·검사 공정 전원 수료)",
+        "owner": "생산부서 최우석 생산팀장",
+        "status": "완료"
+      }
+    ]
+  }
+}

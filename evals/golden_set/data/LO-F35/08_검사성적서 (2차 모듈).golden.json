@@ -1,0 +1,225 @@
+{
+  "file": "08_검사성적서 (2차 모듈).docx",
+  "model": "LO-F35",
+  "scope": "document",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "생성기 입력(f35.json, cgs_models.json)에서 build_cgs.js 와 같은 규칙으로 make_golden.py 가 만든 초안 (2026-11-03). 추출기 출력과 독립. 이 문서(표지·부록 없는 파일)에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 적었다(채점하지 않음). 사람 검수 후 status 를 reviewed 로 바꾼다. 단계별 수량 종합표의 비고는 불량이 나온 공정의 불량 원인이고(modules[].badCause), 불량이 없으면 빈칸(null)이다.",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "model",
+    "productName",
+    "specVersion",
+    "plannedQty",
+    "completedQty",
+    "documents[].dept",
+    "people[].dept",
+    "people[김민준].title",
+    "people[여세아].title",
+    "people[송지유].title",
+    "people[].role",
+    "modules[].qty",
+    "modules[].start",
+    "modules[].end",
+    "modules[].next",
+    "tasks[].stage",
+    "tasks[].start",
+    "tasks[].end",
+    "tasks[].days",
+    "tasks[].preds",
+    "tasks[].owner",
+    "tasks[].assistants",
+    "tasks[].crew",
+    "tasks[].line",
+    "tasks[].work",
+    "tasks[].input",
+    "tasks[].output",
+    "tasks[].check",
+    "tasks[].routeDoc",
+    "tasks[].steps"
+  ],
+  "src": {
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.검사일": "설계",
+    "documents[].meta.대상 품목": "설계",
+    "documents[].meta.공정책임자": "가상",
+    "people[].name": "가상",
+    "people[].title": "가상",
+    "modules[].name": "설계",
+    "modules[].level": "설계",
+    "modules[].leader": "가상",
+    "modules[].badCause": "가상",
+    "tasks[].id": "설계",
+    "tasks[].name": "자료",
+    "tasks[].module": "설계",
+    "tasks[].inQty": "가상",
+    "tasks[].good": "가상",
+    "tasks[].bad": "가상",
+    "tasks[].qcDoc": "설계",
+    "inspections[].doc": "설계",
+    "inspections[].item": "가상",
+    "inspections[].taskId": "설계",
+    "inspections[].standard": "가상",
+    "inspections[].value": "가상",
+    "inspections[].inspector": "가상",
+    "inspections[].verdict": "가상"
+  },
+  "expected": {
+    "documents": [
+      {
+        "no": "검사-08",
+        "title": "검사성적서 (2차 모듈)",
+        "kind": "qc",
+        "version": null,
+        "date": "2026-11-24",
+        "meta": {
+          "문서번호": "검사-08",
+          "검사일": "2026-11-24",
+          "대상 품목": "2개",
+          "공정책임자": "김민준"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "한예준",
+            "title": "주임",
+            "date": "2026-11-24"
+          },
+          {
+            "role": "검토",
+            "name": "차민서",
+            "title": "품질팀장",
+            "date": "2026-11-24"
+          },
+          {
+            "role": "승인",
+            "name": "오세영",
+            "title": "부서장",
+            "date": "2026-11-24"
+          }
+        ],
+        "basedOn": null,
+        "verdict": "합격"
+      }
+    ],
+    "people": [
+      {
+        "name": "한예준",
+        "title": "주임"
+      },
+      {
+        "name": "차민서",
+        "title": "품질팀장"
+      },
+      {
+        "name": "오세영",
+        "title": "부서장"
+      },
+      {
+        "name": "김민준"
+      },
+      {
+        "name": "여세아"
+      },
+      {
+        "name": "송지유"
+      }
+    ],
+    "parts": [],
+    "modules": [
+      {
+        "name": "렌즈 공정",
+        "level": "2차 모듈",
+        "leader": "김민준",
+        "badCause": "MTF 규격 미달"
+      },
+      {
+        "name": "본체 공정",
+        "level": "2차 모듈",
+        "leader": "김민준",
+        "badCause": "노출계 연동 불량·필름실 빛샘"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "공정-08",
+        "name": "렌즈 조립",
+        "module": "렌즈 공정",
+        "inQty": 297,
+        "good": 296,
+        "bad": 1,
+        "qcDoc": "검사-08"
+      },
+      {
+        "id": "공정-12",
+        "name": "본체 조립",
+        "module": "본체 공정",
+        "inQty": 298,
+        "good": 297,
+        "bad": 1,
+        "qcDoc": "검사-08"
+      }
+    ],
+    "iqc": [],
+    "inspections": [
+      {
+        "doc": "검사-08",
+        "item": "MTF",
+        "taskId": "공정-08",
+        "standard": "규격 기준 이상",
+        "value": "296개 기준 충족\n1개 미달",
+        "inspector": "여세아",
+        "verdict": "합격"
+      },
+      {
+        "doc": "검사-08",
+        "item": "노출계 연동·필름실 차광",
+        "taskId": "공정-12",
+        "standard": "노출계 정상, 빛샘 없음",
+        "value": "297개 정상\n1개 미달",
+        "inspector": "송지유",
+        "verdict": "합격"
+      }
+    ],
+    "units": [],
+    "handover": []
+  }
+}

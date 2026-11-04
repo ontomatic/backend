@@ -1,0 +1,253 @@
+{
+  "file": "05_작업 순서 (1차 모듈).docx",
+  "model": "LO-I100",
+  "scope": "document",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "생성기 입력(i100.json, cgs_models.json)에서 build_cgs.js 와 같은 규칙으로 make_golden.py 가 만든 초안 (2026-11-03). 추출기 출력과 독립. 이 문서(표지·부록 없는 파일)에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 적었다(채점하지 않음). 사람 검수 후 status 를 reviewed 로 바꾼다.",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "model",
+    "productName",
+    "specVersion",
+    "plannedQty",
+    "completedQty",
+    "documents[].dept",
+    "people[].dept",
+    "people[].role",
+    "modules[].qty",
+    "modules[].start",
+    "modules[].end",
+    "modules[].next",
+    "modules[].leader",
+    "modules[].badCause",
+    "tasks[].start",
+    "tasks[].end",
+    "tasks[].days",
+    "tasks[].preds",
+    "tasks[].owner",
+    "tasks[].assistants",
+    "tasks[].crew",
+    "tasks[].inQty",
+    "tasks[].good",
+    "tasks[].bad",
+    "tasks[].qcDoc",
+    "tasks[].steps"
+  ],
+  "src": {
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.버전": "설계",
+    "documents[].meta.발행일": "가상",
+    "documents[].meta.근거 부품표": "설계",
+    "people[].name": "가상",
+    "people[].title": "가상",
+    "modules[].name": "설계",
+    "modules[].level": "설계",
+    "tasks[].id": "설계",
+    "tasks[].name": "자료",
+    "tasks[].stage": "자료",
+    "tasks[].module": "설계",
+    "tasks[].line": "자료",
+    "tasks[].work": "자료",
+    "tasks[].input": "자료",
+    "tasks[].output": "자료",
+    "tasks[].check": "설계",
+    "tasks[].routeDoc": "설계"
+  },
+  "expected": {
+    "documents": [
+      {
+        "no": "순서-05",
+        "title": "작업 순서 (1차 모듈)",
+        "kind": "route",
+        "version": "1.0",
+        "date": "2026-11-17",
+        "meta": {
+          "문서번호": "순서-05",
+          "버전": "1.0",
+          "발행일": "2026-11-17",
+          "근거 부품표": "BOM-02 버전 1.0"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "배성민",
+            "title": "선임",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "검토",
+            "name": "최우석",
+            "title": "생산팀장",
+            "date": "2026-11-17"
+          },
+          {
+            "role": "승인",
+            "name": "권상혁",
+            "title": "부서장",
+            "date": "2026-11-17"
+          }
+        ],
+        "basedOn": "BOM-02",
+        "verdict": null
+      }
+    ],
+    "people": [
+      {
+        "name": "배성민",
+        "title": "선임"
+      },
+      {
+        "name": "최우석",
+        "title": "생산팀장"
+      },
+      {
+        "name": "권상혁",
+        "title": "부서장"
+      }
+    ],
+    "parts": [],
+    "modules": [
+      {
+        "name": "렌즈·셔터 공정",
+        "level": "1차 모듈"
+      },
+      {
+        "name": "전원 공정",
+        "level": "1차 모듈"
+      },
+      {
+        "name": "외장 공정",
+        "level": "1차 모듈"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "공정-01",
+        "name": "렌즈 성형",
+        "stage": "부품 준비",
+        "module": "렌즈·셔터 공정",
+        "line": "사출 성형 라인",
+        "work": "광학용 PC·PMMA 렌즈 사출 성형",
+        "input": "원자재",
+        "output": "렌즈",
+        "check": null,
+        "routeDoc": "순서-05"
+      },
+      {
+        "id": "공정-02",
+        "name": "셔터 부품 가공",
+        "stage": "부품 준비",
+        "module": "렌즈·셔터 공정",
+        "line": "기구 가공 라인",
+        "work": "스테인리스 블레이드 프레스·흑색 코팅, PBT 사출",
+        "input": "원자재",
+        "output": "셔터막, 셔터 프레임",
+        "check": null,
+        "routeDoc": "순서-05"
+      },
+      {
+        "id": "공정-05",
+        "name": "렌즈·셔터 조립",
+        "stage": "1차 모듈 조립",
+        "module": "렌즈·셔터 공정",
+        "line": "클린룸 조립실",
+        "work": "내장 렌즈·하우징·셔터 블레이드 조립, 개폐 검사",
+        "input": "렌즈, 경통, 셔터막, 셔터 프레임",
+        "output": "렌즈·셔터부",
+        "check": "셔터 개폐 동작 확인",
+        "routeDoc": "순서-05"
+      },
+      {
+        "id": "공정-04",
+        "name": "사출 부품 성형",
+        "stage": "부품 준비",
+        "module": "전원 공정",
+        "line": "사출 성형 라인",
+        "work": "ABS 사출 성형",
+        "input": "원자재",
+        "output": "배터리 케이스, 렌즈 캡",
+        "check": null,
+        "routeDoc": "순서-05"
+      },
+      {
+        "id": "공정-06",
+        "name": "전원 조립",
+        "stage": "1차 모듈 조립",
+        "module": "전원 공정",
+        "line": "모듈 조립 라인",
+        "work": "배터리 케이스·접점 단자·밀폐재 조립",
+        "input": "배터리 케이스, 접점 단자, O링",
+        "output": "전원부",
+        "check": null,
+        "routeDoc": "순서-05"
+      },
+      {
+        "id": "공정-03",
+        "name": "외장·하우징 성형",
+        "stage": "부품 준비",
+        "module": "외장 공정",
+        "line": "사출 성형 라인",
+        "work": "PC/ABS 외장 커버·렌즈 하우징 사출·도장",
+        "input": "원자재",
+        "output": "외장 커버, 경통",
+        "check": null,
+        "routeDoc": "순서-05"
+      },
+      {
+        "id": "공정-07",
+        "name": "외장 조립",
+        "stage": "1차 모듈 조립",
+        "module": "외장 공정",
+        "line": "모듈 조립 라인",
+        "work": "외장 커버·그립·덮개·체결·표시재 조립",
+        "input": "외장 커버, 그립, 단자 덮개, 패킹, 나사, 와셔, 스트랩 고리, 제품 라벨, 로고 플레이트",
+        "output": "외장부",
+        "check": null,
+        "routeDoc": "순서-05"
+      }
+    ],
+    "iqc": [],
+    "inspections": [],
+    "units": [],
+    "handover": []
+  }
+}

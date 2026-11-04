@@ -26,3 +26,6 @@ CLAUDE.local.md
 !.env.example
 
 .DS_Store
+
+# Golden-set evaluation reports
+evals/golden_set/reports/

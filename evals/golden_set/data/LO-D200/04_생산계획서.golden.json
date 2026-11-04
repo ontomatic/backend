@@ -1,0 +1,561 @@
+{
+  "file": "04_생산계획서.docx",
+  "model": "LO-D200",
+  "scope": "document",
+  "status": "draft",
+  "reviewed_by": null,
+  "notes": "LO-D100 구조를 바탕으로 만든 합성 평가용 가상 모델이다. 자료 태그는 합성 입력 d200.json의 값을 뜻하며 회사 제공 원본 자료가 아니다. 생성기 입력(d200.json, cgs_models.json)에서 build_cgs.js 와 같은 규칙으로 make_golden.py 가 만든 초안 (2026-11-03). 추출기 출력과 독립. 이 문서(표지·부록 없는 파일)에 적힌 값만 담았고, 적혀 있지 않은 칸은 키를 빼고 absent 에 적었다(채점하지 않음). 사람 검수 후 status 를 reviewed 로 바꾼다. 생산계획 표의 완제품 줄은 작업자 배정표와 같은 '완제품 공정'이다(수량은 '1,000대'처럼 쉼표, 정답은 숫자). 생산계획 표에 비고 열이 없어 모듈의 다음 모듈(next)은 어느 문서에도 적혀 있지 않다. 구매 부품 입고·수입검사는 공정번호가 없고 작업 일정에도 없다. 공정책임자·담당자·보조담당자는 이름만 적혀 있어 people 에는 이름만 둔다.",
+  "match": {
+    "documents": [
+      "no"
+    ],
+    "people": [
+      "name"
+    ],
+    "parts": [
+      "name"
+    ],
+    "modules": [
+      "name"
+    ],
+    "tasks": [
+      "id"
+    ],
+    "iqc": [
+      "part"
+    ],
+    "inspections": [
+      "doc",
+      "taskId",
+      "item"
+    ],
+    "units": [
+      "serial"
+    ],
+    "handover": [
+      "item"
+    ]
+  },
+  "absent": [
+    "model",
+    "productName",
+    "specVersion",
+    "completedQty",
+    "documents[].dept",
+    "people[].dept",
+    "people[이서준].title",
+    "people[임평우].title",
+    "people[정하준].title",
+    "people[윤건우].title",
+    "people[장우진].title",
+    "people[강지호].title",
+    "people[임현우].title",
+    "people[김아림].title",
+    "people[최영준].title",
+    "people[신민재].title",
+    "people[윤수아].title",
+    "people[송하은].title",
+    "people[전지민].title",
+    "people[백나연].title",
+    "people[남예린].title",
+    "people[황서진].title",
+    "people[안유진].title",
+    "people[노하윤].title",
+    "people[하지안].title",
+    "people[김민준].title",
+    "people[오지훈].title",
+    "people[김현진].title",
+    "people[한승민].title",
+    "people[김세화].title",
+    "people[성아린].title",
+    "people[김둘화].title",
+    "people[박도윤].title",
+    "people[우도현].title",
+    "people[이성진].title",
+    "people[].role",
+    "modules[].level",
+    "modules[].next",
+    "modules[].badCause",
+    "tasks[].stage",
+    "tasks[].line",
+    "tasks[].work",
+    "tasks[].input",
+    "tasks[].output",
+    "tasks[].check",
+    "tasks[].inQty",
+    "tasks[].good",
+    "tasks[].bad",
+    "tasks[].routeDoc",
+    "tasks[].qcDoc",
+    "tasks[].steps"
+  ],
+  "src": {
+    "plannedQty": "자료",
+    "documents[].no": "설계",
+    "documents[].title": "설계",
+    "documents[].kind": "설계",
+    "documents[].version": "설계",
+    "documents[].date": "가상",
+    "documents[].approval": "가상",
+    "documents[].basedOn": "설계",
+    "documents[].verdict": "가상",
+    "documents[].meta.문서번호": "설계",
+    "documents[].meta.버전": "설계",
+    "documents[].meta.발행일": "가상",
+    "documents[].meta.근거 부품표": "설계",
+    "people[].name": "가상",
+    "people[].title": "가상",
+    "modules[].name": "설계",
+    "modules[].qty": "자료",
+    "modules[].start": "설계",
+    "modules[].end": "설계",
+    "modules[].leader": "가상",
+    "tasks[].id": "설계",
+    "tasks[].name": "자료",
+    "tasks[].start": "설계",
+    "tasks[].end": "설계",
+    "tasks[].days": "자료",
+    "tasks[].preds": "자료",
+    "tasks[].module": "설계",
+    "tasks[].owner": "가상",
+    "tasks[].assistants": "가상",
+    "tasks[].crew": "가상"
+  },
+  "expected": {
+    "plannedQty": 400,
+    "documents": [
+      {
+        "no": "계획-04",
+        "title": "생산계획서",
+        "kind": "plan",
+        "version": "1.0",
+        "date": "2026-11-24",
+        "meta": {
+          "문서번호": "계획-04",
+          "버전": "1.0",
+          "발행일": "2026-11-24",
+          "근거 부품표": "BOM-02 버전 1.0"
+        },
+        "approval": [
+          {
+            "role": "담당",
+            "name": "홍지원",
+            "title": "대리",
+            "date": "2026-11-24"
+          },
+          {
+            "role": "검토",
+            "name": "최우석",
+            "title": "생산팀장",
+            "date": "2026-11-24"
+          },
+          {
+            "role": "승인",
+            "name": "권상혁",
+            "title": "부서장",
+            "date": "2026-11-24"
+          }
+        ],
+        "basedOn": "BOM-02",
+        "verdict": null
+      }
+    ],
+    "people": [
+      {
+        "name": "홍지원",
+        "title": "대리"
+      },
+      {
+        "name": "최우석",
+        "title": "생산팀장"
+      },
+      {
+        "name": "권상혁",
+        "title": "부서장"
+      },
+      {
+        "name": "이서준"
+      },
+      {
+        "name": "임평우"
+      },
+      {
+        "name": "정하준"
+      },
+      {
+        "name": "윤건우"
+      },
+      {
+        "name": "장우진"
+      },
+      {
+        "name": "강지호"
+      },
+      {
+        "name": "임현우"
+      },
+      {
+        "name": "김아림"
+      },
+      {
+        "name": "최영준"
+      },
+      {
+        "name": "신민재"
+      },
+      {
+        "name": "윤수아"
+      },
+      {
+        "name": "송하은"
+      },
+      {
+        "name": "전지민"
+      },
+      {
+        "name": "백나연"
+      },
+      {
+        "name": "남예린"
+      },
+      {
+        "name": "황서진"
+      },
+      {
+        "name": "안유진"
+      },
+      {
+        "name": "노하윤"
+      },
+      {
+        "name": "하지안"
+      },
+      {
+        "name": "김민준"
+      },
+      {
+        "name": "오지훈"
+      },
+      {
+        "name": "김현진"
+      },
+      {
+        "name": "한승민"
+      },
+      {
+        "name": "김세화"
+      },
+      {
+        "name": "성아린"
+      },
+      {
+        "name": "김둘화"
+      },
+      {
+        "name": "박도윤"
+      },
+      {
+        "name": "우도현"
+      },
+      {
+        "name": "이성진"
+      }
+    ],
+    "parts": [],
+    "modules": [
+      {
+        "name": "광학 공정",
+        "qty": 400,
+        "start": "2026-11-25",
+        "end": "2026-12-03",
+        "leader": "이서준"
+      },
+      {
+        "name": "경통 공정",
+        "qty": 400,
+        "start": "2026-11-25",
+        "end": "2026-12-02",
+        "leader": "이서준"
+      },
+      {
+        "name": "센서 공정",
+        "qty": 400,
+        "start": "2026-11-27",
+        "end": "2026-11-30",
+        "leader": "이서준"
+      },
+      {
+        "name": "셔터 공정",
+        "qty": 400,
+        "start": "2026-11-25",
+        "end": "2026-12-01",
+        "leader": "이서준"
+      },
+      {
+        "name": "화면·전원 공정",
+        "qty": 400,
+        "start": "2026-11-25",
+        "end": "2026-11-30",
+        "leader": "이서준"
+      },
+      {
+        "name": "외장 공정",
+        "qty": 400,
+        "start": "2026-11-25",
+        "end": "2026-12-03",
+        "leader": "이서준"
+      },
+      {
+        "name": "렌즈 공정",
+        "qty": 400,
+        "start": "2026-12-04",
+        "end": "2026-12-08",
+        "leader": "김민준"
+      },
+      {
+        "name": "본체 공정",
+        "qty": 400,
+        "start": "2026-12-04",
+        "end": "2026-12-08",
+        "leader": "김민준"
+      },
+      {
+        "name": "완제품 공정",
+        "qty": 400,
+        "start": "2026-12-09",
+        "end": "2026-12-10",
+        "leader": "박도윤"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "공정-01",
+        "name": "렌즈 가공",
+        "start": "2026-11-25",
+        "end": "2026-12-01",
+        "days": 5,
+        "preds": [],
+        "module": "광학 공정",
+        "owner": "임평우",
+        "assistants": [
+          "정하준"
+        ],
+        "crew": 3
+      },
+      {
+        "id": "공정-02",
+        "name": "경통 가공",
+        "start": "2026-11-25",
+        "end": "2026-11-30",
+        "days": 4,
+        "preds": [],
+        "module": "경통 공정",
+        "owner": "강지호",
+        "assistants": [],
+        "crew": 2
+      },
+      {
+        "id": "공정-03",
+        "name": "셔터 부품 가공",
+        "start": "2026-11-25",
+        "end": "2026-11-27",
+        "days": 3,
+        "preds": [],
+        "module": "셔터 공정",
+        "owner": "신민재",
+        "assistants": [],
+        "crew": 2
+      },
+      {
+        "id": "공정-04",
+        "name": "외장 커버 가공",
+        "start": "2026-11-25",
+        "end": "2026-12-01",
+        "days": 5,
+        "preds": [],
+        "module": "외장 공정",
+        "owner": "황서진",
+        "assistants": [
+          "안유진"
+        ],
+        "crew": 3
+      },
+      {
+        "id": "공정-05",
+        "name": "사출 부품 성형",
+        "start": "2026-11-25",
+        "end": "2026-11-27",
+        "days": 3,
+        "preds": [],
+        "module": "화면·전원 공정",
+        "owner": "송하은",
+        "assistants": [
+          "전지민"
+        ],
+        "crew": 3
+      },
+      {
+        "id": "공정-06",
+        "name": "광학 조립",
+        "start": "2026-12-02",
+        "end": "2026-12-03",
+        "days": 2,
+        "preds": [
+          "공정-01"
+        ],
+        "module": "광학 공정",
+        "owner": "윤건우",
+        "assistants": [
+          "장우진"
+        ],
+        "crew": 3
+      },
+      {
+        "id": "공정-07",
+        "name": "경통 조립",
+        "start": "2026-12-01",
+        "end": "2026-12-02",
+        "days": 2,
+        "preds": [
+          "공정-02"
+        ],
+        "module": "경통 공정",
+        "owner": "임현우",
+        "assistants": [],
+        "crew": 2
+      },
+      {
+        "id": "공정-08",
+        "name": "렌즈 조립",
+        "start": "2026-12-04",
+        "end": "2026-12-08",
+        "days": 3,
+        "preds": [
+          "공정-06",
+          "공정-07"
+        ],
+        "module": "렌즈 공정",
+        "owner": "오지훈",
+        "assistants": [
+          "김현진",
+          "한승민"
+        ],
+        "crew": 4
+      },
+      {
+        "id": "공정-09",
+        "name": "센서 조립",
+        "start": "2026-11-27",
+        "end": "2026-11-30",
+        "days": 2,
+        "preds": [],
+        "module": "센서 공정",
+        "owner": "김아림",
+        "assistants": [
+          "최영준"
+        ],
+        "crew": 3
+      },
+      {
+        "id": "공정-10",
+        "name": "셔터 조립",
+        "start": "2026-11-30",
+        "end": "2026-12-01",
+        "days": 2,
+        "preds": [
+          "공정-03"
+        ],
+        "module": "셔터 공정",
+        "owner": "윤수아",
+        "assistants": [],
+        "crew": 2
+      },
+      {
+        "id": "공정-11",
+        "name": "화면 조립",
+        "start": "2026-11-30",
+        "end": "2026-11-30",
+        "days": 1,
+        "preds": [
+          "공정-05"
+        ],
+        "module": "화면·전원 공정",
+        "owner": "백나연",
+        "assistants": [],
+        "crew": 2
+      },
+      {
+        "id": "공정-12",
+        "name": "전원 조립",
+        "start": "2026-11-30",
+        "end": "2026-11-30",
+        "days": 1,
+        "preds": [
+          "공정-05"
+        ],
+        "module": "화면·전원 공정",
+        "owner": "남예린",
+        "assistants": [],
+        "crew": 2
+      },
+      {
+        "id": "공정-13",
+        "name": "외장 조립",
+        "start": "2026-12-02",
+        "end": "2026-12-03",
+        "days": 2,
+        "preds": [
+          "공정-04"
+        ],
+        "module": "외장 공정",
+        "owner": "노하윤",
+        "assistants": [
+          "하지안"
+        ],
+        "crew": 3
+      },
+      {
+        "id": "공정-14",
+        "name": "본체 조립",
+        "start": "2026-12-04",
+        "end": "2026-12-08",
+        "days": 3,
+        "preds": [
+          "공정-09",
+          "공정-10",
+          "공정-11",
+          "공정-12",
+          "공정-13"
+        ],
+        "module": "본체 공정",
+        "owner": "김세화",
+        "assistants": [
+          "성아린",
+          "김둘화"
+        ],
+        "crew": 4
+      },
+      {
+        "id": "공정-15",
+        "name": "최종 결합·검사",
+        "start": "2026-12-09",
+        "end": "2026-12-10",
+        "days": 2,
+        "preds": [
+          "공정-08",
+          "공정-14"
+        ],
+        "module": "완제품 공정",
+        "owner": "우도현",
+        "assistants": [
+          "이성진"
+        ],
+        "crew": 3
+      }
+    ],
+    "iqc": [],
+    "inspections": [],
+    "units": [],
+    "handover": []
+  }
+}
