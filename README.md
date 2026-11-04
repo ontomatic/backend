@@ -35,6 +35,7 @@ cp -n packages/backend/.env.example packages/backend/.env
 
 backend의 `.env`에는 다음 값을 설정한다.
 
+- `APP_ENV`: `local`, `dev`, `prod` 중 하나이며 기본값은 `local`이다. `local`과 `dev`에서만 HTTP·HTTPS의 `localhost`, `127.0.0.1` origin을 모든 포트에서 CORS 허용한다. 운영 환경에서는 `APP_ENV=prod`를 명시한다.
 - `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`: 로컬 DB 접속 정보. 기본 호스트·포트는 `localhost:5432`이다.
 - `JWT_SECRET_KEY`: 로컬 인증에 사용할 충분히 긴 난수 키.
 - `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`: RustFS 접속 정보. Compose와 backend가 같은 값을 사용한다.

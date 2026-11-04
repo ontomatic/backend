@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     env_ignore_empty=True,
   )
 
+  app_env: Literal['local', 'dev', 'prod'] = 'local'
+
   postgres_user: str
   postgres_password: SecretStr
   postgres_host: str = 'localhost'

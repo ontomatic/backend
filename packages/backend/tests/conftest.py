@@ -21,6 +21,7 @@ def api_settings() -> Generator[Settings, None, None]:
   # Keep imported references to get_settings consistent by using its normal environment loader.
   with pytest.MonkeyPatch.context() as monkeypatch:
     for name, value in {
+      'APP_ENV': 'local',
       'POSTGRES_USER': 'test',
       'POSTGRES_PASSWORD': 'test',
       'POSTGRES_DB': 'test',
