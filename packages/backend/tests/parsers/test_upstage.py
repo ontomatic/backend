@@ -6,8 +6,13 @@ from urllib.error import HTTPError, URLError
 
 import pytest
 from backend.core.config import Settings
+from backend.models import File
+from backend.models.file import FileStatus
+from backend.models.workflow import WorkDocument
 from backend.parsers.documents import factory, upstage
 from backend.parsers.documents.interface import SourceLocation, TableBlock, TextBlock
+from backend.services import document as document_service
+from backend.services import work_documents
 from pydantic import SecretStr, ValidationError
 
 
@@ -130,3 +135,50 @@ def test_upstage_pads_missing_cells_and_handles_empty_cells(monkeypatch: pytest.
     ['', 'b'],
     ['c', None],
   ]
+
+
+@pytest.mark.parametrize('service', ['document', 'work_document'])
+@pytest.mark.parametrize('valid_response', [True, False])
+def test_document_services_use_selected_provider_and_keep_error_handling(
+  workspace: dict, api_settings: Settings, monkeypatch: pytest.MonkeyPatch, service: str, valid_response: bool
+) -> None:
+  # Given an uploaded PDF with Upstage selected and a successful or malformed remote response.
+  monkeypatch.setattr(api_settings, 'parser_provider', 'upstage')
+  monkeypatch.setattr(api_settings, 'upstage_api_key', SecretStr('test-key'))
+  payload = {'elements': [{'category': 'paragraph', 'page': 1, 'content': {'text': '원문', 'html': '<p>원문</p>'}}]}
+  requests = mock_response(monkeypatch, payload if valid_response else {})
+  monkeypatch.setattr(document_service, 'get_session', workspace['factory'])
+  monkeypatch.setattr(document_service, 'get_storage', work_documents.get_storage)
+  user = workspace['users']['rd']
+  with workspace['factory']() as session:
+    file = File(
+      uploader_id=user.id,
+      bucket='test',
+      key='original.pdf',
+      original_filename='원본.pdf',
+      content_type='application/pdf',
+      status=FileStatus.UPLOADED,
+    )
+    session.add(file)
+    session.commit()
+
+    # When either document service parses the original.
+    if service == 'document':
+      if valid_response:
+        assert document_service.parse_document(user.id, file.id).blocks[0].text == '원문'
+      else:
+        with pytest.raises(ValueError):
+          document_service.parse_document(user.id, file.id)
+    else:
+      document = WorkDocument(file_id=file.id)
+      work_documents.parse_work_document(session, document)
+
+      # Then the workflow stores converted blocks on success and records failures as errors.
+      assert document.status == ('parsed' if valid_response else 'error')
+      if valid_response:
+        assert document.blocks[0]['text'] == '원문'
+        assert document.blocks[0]['location']['page_number'] == 1
+        assert document.error is None
+      else:
+        assert document.error
+  assert len(requests) == 1

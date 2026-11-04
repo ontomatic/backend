@@ -13,7 +13,7 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import ConnectionPoolEntry, StaticPool
 
-from .factories import create_user
+from .factories import create_department, create_user
 
 
 @pytest.fixture(scope='session')
@@ -94,3 +94,24 @@ def admin_user(db_session: Session) -> User:
 def admin_client(client: TestClient, admin_user: User) -> TestClient:
   client.headers['Authorization'] = f'Bearer {create_access_token(admin_user.id)}'
   return client
+
+
+@pytest.fixture
+def workspace(client: TestClient, session_factory: sessionmaker[Session], monkeypatch: pytest.MonkeyPatch) -> dict:
+  Base.metadata.create_all(session_factory.kw['bind'])
+  users = {}
+  with session_factory() as session:
+    for short, code in [
+      ('rd', 'research_and_development'),
+      ('qa', 'quality_assurance'),
+      ('pm', 'production_management'),
+    ]:
+      department = create_department(session, code=code, name=short)
+      users[short] = create_user(session, emp_id=short, department=department)
+
+  class Storage:
+    def download(self, key: str, stream: object) -> None:
+      stream.write(b'field,value,unit\nlength,8,mm\n')
+
+  monkeypatch.setattr('backend.services.work_documents.get_storage', lambda bucket: Storage())
+  return {'client': client, 'factory': session_factory, 'users': users}
