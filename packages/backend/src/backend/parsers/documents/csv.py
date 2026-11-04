@@ -6,7 +6,7 @@ from backend.parsers.documents.interface import ParsedDocument, TableBlock
 def parse_csv(source: BytesIO) -> ParsedDocument:
   import csv
 
-  text_source = TextIOWrapper(source, encoding='utf-8')
+  text_source = TextIOWrapper(source, encoding='utf-8-sig')
   try:
     reader = csv.reader(text_source)
     block = TableBlock(rows=[list(row) for row in reader], location=None)

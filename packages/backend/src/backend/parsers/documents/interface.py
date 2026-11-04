@@ -8,6 +8,9 @@ class SourceLocation:
   page_number: int | None = None  # pdf, docx... 페이지 명
   sheet_name: str | None = None  # xlsx 시트명
   cell_range: str | None = None  # A1:D20
+  block_index: int | None = None
+  section_title: str | None = None
+  document_number: str | None = None
 
 
 @dataclass
@@ -15,6 +18,7 @@ class TextBlock:
   kind: Literal['text'] = field(default='text', init=False)
   text: str
   location: SourceLocation | None = None
+  heading_level: int | None = None
 
 
 @dataclass
