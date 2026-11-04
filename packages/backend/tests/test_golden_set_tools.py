@@ -55,6 +55,24 @@ def test_model_folder_accepts_current_layout(tmp_path: Path, monkeypatch: pytest
   assert Path(module.model_folder('LO-D100')) == tmp_path / 'LO-D100'
 
 
+def test_golden_generation_writes_only_document_answers(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+  # Given model inputs, when generating goldens, then each document gets one answer and no model answer is created.
+  module = load_generator('make_golden')
+  folder = tmp_path / 'LO-D100'
+  folder.mkdir()
+  originals = list((GENERATOR.parent / 'data' / folder.name).glob('*.docx'))
+  for file in originals:
+    (folder / file.name).touch()
+  monkeypatch.setattr(module, 'DATA', str(tmp_path))
+  monkeypatch.setattr(sys, 'argv', ['make_golden.py', 'd100.json'])
+
+  module.main()
+
+  answers = list(folder.glob('*.golden.json'))
+  assert len(answers) == len(originals) == 10
+  assert all(json.loads(file.read_text())['scope'] == 'document' for file in answers)
+
+
 def test_golden_check_preserves_unicode_filename_and_review_metadata(
   tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

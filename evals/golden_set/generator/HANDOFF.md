@@ -3,7 +3,8 @@
 ## 현재 실행 방법 Python 전환
 
 저장소 루트에서 Python 3.12와 기존 `uv` 환경만 사용한다. Node.js·npm·Bun은 필요 없다.
-현재 데이터는 4개 모델 각각 문서 10개, 정답 11개, 오류 사례 26개다.
+현재 데이터는 5개 모델 각각 문서 10개, 문서별 정답 10개, 오류 사례 26개다.
+합본 문서·정답 생성과 합본 평가는 제거했다. 문서 생성기의 출력은 개별 DOCX 10개를 담는 폴더다.
 아래의 이전 기록에 나오는 JavaScript·TypeScript 명령과 옛 폴더명은 사용하지 않는다.
 
 ```sh
@@ -23,9 +24,8 @@ DOCX 해석은 `backend.parsers.documents.docx.parse_docx`를 재사용한다.
 
 ```sh
 # 기존 데이터를 덮어쓰지 않고 별도 출력으로 생성한다.
-uv run python -m evals.golden_set.generator.build_cgs evals/golden_set/reports/d100.docx evals/golden_set/generator/d100.json
-uv run python -m evals.golden_set.generator.build_cgs evals/golden_set/reports/d100_split evals/golden_set/generator/d100.json --split
-uv run python evals/golden_set/generator/check_cgs.py evals/golden_set/reports/d100.docx evals/golden_set/generator/d100.json
+uv run python -m evals.golden_set.generator.build_cgs evals/golden_set/reports/d100 evals/golden_set/generator/d100.json
+uv run python evals/golden_set/generator/check_cgs.py evals/golden_set/data/LO-D100 evals/golden_set/generator/d100.json
 uv run python evals/golden_set/generator/make_wrong_set.py --output evals/golden_set/reports/wrong_set
 uv run python evals/golden_set/generator/make_review.py
 ```

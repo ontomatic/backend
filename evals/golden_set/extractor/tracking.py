@@ -39,12 +39,7 @@ def run_items(
   async def run_task(*, item: dict, **kwargs: Any) -> dict:
     nonlocal current
     current += 1
-    if 'id' in item['input']:
-      label = item['input']['id']
-    elif item['metadata']['scope'] == 'model':
-      label = f'{item["metadata"]["model"]} 합본'
-    else:
-      label = item['input']['files'][0]
+    label = item['input']['id'] if 'id' in item['input'] else item['input']['files'][0]
     prefix = f'[{name}] [{current}/{len(data)}]'
     print(f'{prefix} 시작: {label}', file=sys.stderr, flush=True)
     try:

@@ -104,10 +104,14 @@ def model_folder(model):
 
 
 def build_cases(model, ctx):
-  g = json.loads(Path(model_folder(model), f'{model}.golden.json').read_text(encoding='utf-8'))['expected']
-  T = g['tasks']
-  parts = g['parts']
-  iqc = g['iqc']
+  goldens = {
+    unicodedata.normalize('NFC', path.name): json.loads(path.read_text(encoding='utf-8'))['expected']
+    for path in Path(model_folder(model)).glob('*.golden.json')
+  }
+  g = {key: goldens[unicodedata.normalize('NFC', name[:-5] + '.golden.json')] for key, name in ctx['file'].items()}
+  T = g['plan']['tasks']
+  parts = g['bom']['parts']
+  iqc = g['iqc']['iqc']
   DN = ctx['docno']
 
   def tid(pred):
@@ -118,7 +122,7 @@ def build_cases(model, ctx):
   longer = tid(lambda t: t['days'] >= 2)  # 기간 2일 이상인 첫 공정
   own = next(p for p in parts if p['sourcing'] == '자체 가공')  # 자체 가공 부품 (수입검사 대상 아님)
   buy = next(p for p in parts if p['sourcing'] == '구매')
-  qc1_ins = next(i for i in g['inspections'] if i['doc'] == DN['qc1'])
+  qc1_ins = next(i for i in g['qc1']['inspections'] if i['doc'] == DN['qc1'])
   crew_row = 1  # 작업자 배정표 첫 공정 줄
   cases = []
 
